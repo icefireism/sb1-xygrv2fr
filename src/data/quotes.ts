@@ -1,5 +1,5 @@
 export const dailyQuotes = [
-  "Through every twist and turn, never forget – you're never alone. You've got me, always.",
+  "You light up every room you walk into – never forget your glow was made to shine, not shrink.",
   "No mountain is too high when you've got fire in your heart and a sister in your corner.",
   "Life may throw storms, but with you by my side, every rainbow feels closer.",
   "You've got the strength of a thousand hearts and the smile that melts a million worries.",
@@ -14,10 +14,10 @@ export const dailyQuotes = [
   "If your wings ever forget how to fly, I'll remind them what they're made for.",
   "You're like sunshine mixed with resilience – the rare kind of magic that never fades.",
   "You're doing better than you think. Be gentle with your soul, it's learning.",
-  "You light up every room you walk into – never forget your glow was made to shine, not shrink."
+  "Through every twist and turn, never forget – you're never alone. You've got me, always."
 ];
 
 export const getDailyQuote = (): string => {
-  // Always return the sister quote (first one in the array)
-  return dailyQuotes[0];
+  // Return the second quote - the mountain/sister quote
+  return dailyQuotes[1];
 };
