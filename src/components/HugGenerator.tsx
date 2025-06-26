@@ -26,6 +26,7 @@ interface HandPrint {
   rotation: number;
   isLeft: boolean;
   delay: number;
+  size: number;
 }
 
 export const HugGenerator: React.FC = () => {
@@ -46,51 +47,55 @@ export const HugGenerator: React.FC = () => {
   const generateHandPrints = (): HandPrint[] => {
     const prints: HandPrint[] = [];
     
-    // Left side hand prints (right hands reaching from left)
-    for (let i = 0; i < 4; i++) {
+    // Left side hand prints (right hands reaching from left) - More visible
+    for (let i = 0; i < 6; i++) {
       prints.push({
         id: i,
-        x: Math.random() * 25, // Left 25% of screen
-        y: 20 + Math.random() * 60, // Middle area
-        rotation: -15 + Math.random() * 30,
+        x: Math.random() * 30, // Left 30% of screen
+        y: 15 + Math.random() * 70, // Spread across height
+        rotation: -25 + Math.random() * 50,
         isLeft: false, // Right hand from left side
-        delay: i * 0.2
+        delay: i * 0.15,
+        size: 0.8 + Math.random() * 0.6 // Varied sizes
       });
     }
     
-    // Right side hand prints (left hands reaching from right)
+    // Right side hand prints (left hands reaching from right) - More visible
+    for (let i = 0; i < 6; i++) {
+      prints.push({
+        id: i + 6,
+        x: 70 + Math.random() * 30, // Right 30% of screen
+        y: 15 + Math.random() * 70, // Spread across height
+        rotation: -25 + Math.random() * 50,
+        isLeft: true, // Left hand from right side
+        delay: i * 0.15 + 0.1,
+        size: 0.8 + Math.random() * 0.6
+      });
+    }
+    
+    // Top hand prints - More prominent
     for (let i = 0; i < 4; i++) {
       prints.push({
-        id: i + 4,
-        x: 75 + Math.random() * 25, // Right 25% of screen
-        y: 20 + Math.random() * 60, // Middle area
-        rotation: -15 + Math.random() * 30,
-        isLeft: true, // Left hand from right side
-        delay: i * 0.2 + 0.1
+        id: i + 12,
+        x: 20 + Math.random() * 60, // Center area
+        y: Math.random() * 25, // Top 25%
+        rotation: 60 + Math.random() * 60,
+        isLeft: Math.random() > 0.5,
+        delay: i * 0.12 + 0.3,
+        size: 0.9 + Math.random() * 0.4
       });
     }
     
-    // Top hand prints
-    for (let i = 0; i < 3; i++) {
+    // Bottom hand prints - More prominent
+    for (let i = 0; i < 4; i++) {
       prints.push({
-        id: i + 8,
-        x: 25 + Math.random() * 50, // Center area
-        y: Math.random() * 20, // Top 20%
-        rotation: 45 + Math.random() * 90,
+        id: i + 16,
+        x: 20 + Math.random() * 60, // Center area
+        y: 75 + Math.random() * 25, // Bottom 25%
+        rotation: -60 + Math.random() * 60,
         isLeft: Math.random() > 0.5,
-        delay: i * 0.15 + 0.3
-      });
-    }
-    
-    // Bottom hand prints
-    for (let i = 0; i < 3; i++) {
-      prints.push({
-        id: i + 11,
-        x: 25 + Math.random() * 50, // Center area
-        y: 80 + Math.random() * 20, // Bottom 20%
-        rotation: -45 + Math.random() * 90,
-        isLeft: Math.random() > 0.5,
-        delay: i * 0.15 + 0.4
+        delay: i * 0.12 + 0.4,
+        size: 0.9 + Math.random() * 0.4
       });
     }
     
@@ -127,100 +132,149 @@ export const HugGenerator: React.FC = () => {
     }, 5000);
   };
 
-  const HandPrintSVG: React.FC<{ isLeft: boolean; className?: string }> = ({ isLeft, className = "" }) => (
+  const HandPrintSVG: React.FC<{ isLeft: boolean; size: number; className?: string }> = ({ isLeft, size, className = "" }) => (
     <svg
-      width="60"
-      height="80"
-      viewBox="0 0 60 80"
+      width={80 * size}
+      height={100 * size}
+      viewBox="0 0 80 100"
       className={className}
       style={{ transform: isLeft ? 'scaleX(-1)' : 'none' }}
     >
+      {/* Hand shadow/depth */}
+      <g transform="translate(2, 2)" opacity="0.3">
+        {/* Palm shadow */}
+        <ellipse
+          cx="40"
+          cy="55"
+          rx="22"
+          ry="30"
+          fill="rgba(0, 0, 0, 0.4)"
+        />
+        {/* Finger shadows */}
+        <ellipse cx="30" cy="20" rx="7" ry="22" fill="rgba(0, 0, 0, 0.3)" />
+        <ellipse cx="40" cy="15" rx="7" ry="25" fill="rgba(0, 0, 0, 0.3)" />
+        <ellipse cx="50" cy="20" rx="6" ry="22" fill="rgba(0, 0, 0, 0.3)" />
+        <ellipse cx="58" cy="28" rx="5" ry="18" fill="rgba(0, 0, 0, 0.3)" />
+        <ellipse cx="20" cy="42" rx="9" ry="18" fill="rgba(0, 0, 0, 0.3)" transform="rotate(-25 20 42)" />
+      </g>
+      
+      {/* Main hand */}
       {/* Palm */}
       <ellipse
-        cx="30"
-        cy="45"
+        cx="40"
+        cy="55"
+        rx="22"
+        ry="30"
+        fill="rgba(255, 255, 255, 0.35)"
+        stroke="rgba(255, 255, 255, 0.6)"
+        strokeWidth="2"
+      />
+      
+      {/* Palm gradient overlay */}
+      <ellipse
+        cx="40"
+        cy="55"
         rx="18"
         ry="25"
-        fill="rgba(255, 255, 255, 0.15)"
-        stroke="rgba(255, 255, 255, 0.3)"
-        strokeWidth="1"
+        fill="url(#palmGradient)"
+        opacity="0.7"
       />
       
       {/* Thumb */}
       <ellipse
-        cx="15"
-        cy="35"
-        rx="8"
-        ry="15"
-        fill="rgba(255, 255, 255, 0.12)"
-        stroke="rgba(255, 255, 255, 0.25)"
-        strokeWidth="1"
-        transform="rotate(-20 15 35)"
+        cx="20"
+        cy="42"
+        rx="9"
+        ry="18"
+        fill="rgba(255, 255, 255, 0.32)"
+        stroke="rgba(255, 255, 255, 0.55)"
+        strokeWidth="2"
+        transform="rotate(-25 20 42)"
       />
       
       {/* Index finger */}
       <ellipse
-        cx="25"
-        cy="15"
-        rx="6"
-        ry="18"
-        fill="rgba(255, 255, 255, 0.12)"
-        stroke="rgba(255, 255, 255, 0.25)"
-        strokeWidth="1"
+        cx="30"
+        cy="20"
+        rx="7"
+        ry="22"
+        fill="rgba(255, 255, 255, 0.32)"
+        stroke="rgba(255, 255, 255, 0.55)"
+        strokeWidth="2"
       />
       
       {/* Middle finger */}
       <ellipse
-        cx="32"
-        cy="12"
-        rx="6"
-        ry="20"
-        fill="rgba(255, 255, 255, 0.12)"
-        stroke="rgba(255, 255, 255, 0.25)"
-        strokeWidth="1"
+        cx="40"
+        cy="15"
+        rx="7"
+        ry="25"
+        fill="rgba(255, 255, 255, 0.32)"
+        stroke="rgba(255, 255, 255, 0.55)"
+        strokeWidth="2"
       />
       
       {/* Ring finger */}
       <ellipse
-        cx="39"
-        cy="15"
-        rx="5"
-        ry="18"
-        fill="rgba(255, 255, 255, 0.12)"
-        stroke="rgba(255, 255, 255, 0.25)"
-        strokeWidth="1"
+        cx="50"
+        cy="20"
+        rx="6"
+        ry="22"
+        fill="rgba(255, 255, 255, 0.32)"
+        stroke="rgba(255, 255, 255, 0.55)"
+        strokeWidth="2"
       />
       
       {/* Pinky */}
       <ellipse
-        cx="45"
-        cy="20"
-        rx="4"
-        ry="15"
-        fill="rgba(255, 255, 255, 0.12)"
-        stroke="rgba(255, 255, 255, 0.25)"
-        strokeWidth="1"
+        cx="58"
+        cy="28"
+        rx="5"
+        ry="18"
+        fill="rgba(255, 255, 255, 0.32)"
+        stroke="rgba(255, 255, 255, 0.55)"
+        strokeWidth="2"
       />
       
-      {/* Palm lines for realism */}
+      {/* Palm lines for ultra realism */}
       <path
-        d="M 20 40 Q 30 45 40 40"
-        stroke="rgba(255, 255, 255, 0.2)"
-        strokeWidth="1"
+        d="M 25 50 Q 40 55 55 50"
+        stroke="rgba(255, 255, 255, 0.4)"
+        strokeWidth="2"
         fill="none"
       />
       <path
-        d="M 22 50 Q 30 52 38 50"
-        stroke="rgba(255, 255, 255, 0.15)"
-        strokeWidth="1"
+        d="M 28 62 Q 40 65 52 62"
+        stroke="rgba(255, 255, 255, 0.35)"
+        strokeWidth="2"
         fill="none"
       />
+      <path
+        d="M 30 70 Q 40 72 50 70"
+        stroke="rgba(255, 255, 255, 0.3)"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      
+      {/* Finger creases */}
+      <path d="M 27 30 Q 30 32 33 30" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" fill="none" />
+      <path d="M 37 25 Q 40 27 43 25" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" fill="none" />
+      <path d="M 47 30 Q 50 32 53 30" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" fill="none" />
+      
+      {/* Gradient definitions */}
+      <defs>
+        <radialGradient id="palmGradient" cx="0.3" cy="0.3">
+          <stop offset="0%" stopColor="rgba(255, 255, 255, 0.4)" />
+          <stop offset="70%" stopColor="rgba(255, 255, 255, 0.1)" />
+          <stop offset="100%" stopColor="rgba(255, 255, 255, 0.05)" />
+        </radialGradient>
+      </defs>
     </svg>
   );
 
   return (
     <div className="w-full max-w-2xl mx-auto mb-8 relative">
-      {/* Hand Prints Overlay */}
+      {/* Hand Prints Overlay - Much more visible */}
       {handPrints.length > 0 && (
         <div className="fixed inset-0 pointer-events-none z-30">
           {handPrints.map((print) => (
@@ -236,17 +290,18 @@ export const HugGenerator: React.FC = () => {
             >
               <HandPrintSVG 
                 isLeft={print.isLeft} 
-                className="drop-shadow-lg opacity-0 animate-hand-appear"
+                size={print.size}
+                className="drop-shadow-2xl opacity-0 animate-hand-appear filter brightness-110"
               />
             </div>
           ))}
         </div>
       )}
 
-      {/* Screen Squeeze Effect */}
+      {/* Screen Squeeze Effect - More dramatic */}
       <div 
         className={`transition-all duration-1000 ease-in-out ${
-          screenSqueeze ? 'scale-95 blur-[0.5px]' : 'scale-100'
+          screenSqueeze ? 'scale-90 blur-[1px] brightness-95' : 'scale-100'
         }`}
       >
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 md:p-8 border border-white/20 shadow-2xl">
