@@ -18,6 +18,6 @@ export const dailyQuotes = [
 ];
 
 export const getDailyQuote = (): string => {
-  // Return the second quote - the mountain/sister quote
-  return dailyQuotes[1];
+  // Return the third quote - the rainbow/storms quote
+  return dailyQuotes[2];
 };
