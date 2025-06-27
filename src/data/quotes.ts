@@ -5,7 +5,7 @@ export const dailyQuotes = [
   "You light up every room you walk into – never forget your glow was made to shine, not shrink.",
   "No mountain is too high when you've got fire in your heart and a sister in your corner.",
   "Life may throw storms, but with you by my side, every rainbow feels closer.",
-  "You've got the strength of a thousand hearts and the smile that melts a million worries.",
+  "You don't chase rainbows—you carry one with you, lighting up everything in your path.",
   "Even on your hardest days, I hope you remember how deeply loved and wildly capable you are.",
   "Chin up, crown on – queens like you don't quit, they rise.",
   "You were never meant to blend in – your sparkle is supposed to stand out.",
