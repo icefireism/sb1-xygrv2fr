@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Scroll, Sparkles } from 'lucide-react';
 
 const prophecies = [
-  "The stars align — today brings ice cream and mischief in equal measure",
-  "Ancient runes foretell of laughter echoing through realms unknown",
-  "The cosmic winds whisper of adventures yet to unfold this day",
-  "Destiny speaks: joy shall multiply tenfold before the sun sets",
-  "The oracle sees cake crumbs and happy tears in your future",
-  "Celestial forces conspire to make this day extraordinarily magical",
-  "The fates have woven golden threads of wonder into your path",
-  "Sacred scrolls reveal: today you shall be crowned with pure happiness",
-  "The universe declares this day blessed with infinite possibilities",
-  "Ancient prophecy fulfilled: your smile shall light up distant galaxies"
+  "The moon whispers secrets of chocolate cake and endless giggles",
+  "Crystal visions reveal a day painted in golden laughter and sweet surprises",
+  "The ancient spirits decree: today shall overflow with magical moments",
+  "Starlight prophecy unfolds: your heart will dance with pure joy",
+  "The mystic winds carry news of adventures wrapped in birthday wishes",
+  "Sacred flames illuminate a path of wonder and delightful chaos",
+  "The oracle's mirror shows reflections of happiness multiplied infinitely",
+  "Celestial guardians have blessed this day with extraordinary magic",
+  "The cosmic tapestry weaves threads of celebration through your destiny",
+  "Ancient wisdom speaks: today you shall collect memories like precious gems"
 ];
 
 const getDailyProphecy = (): string => {
