@@ -30,6 +30,20 @@ export const BirthdayProphecyScroll: React.FC = () => {
   const prophecy = getDailyProphecy();
 
   useEffect(() => {
+    // Prevent scrolling when scroll is visible
+    if (isVisible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isVisible]);
+
+  useEffect(() => {
     // Show scroll after a brief delay
     const timer = setTimeout(() => {
       setIsVisible(true);
