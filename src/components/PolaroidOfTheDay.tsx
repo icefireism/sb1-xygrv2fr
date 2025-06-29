@@ -3,7 +3,7 @@ import { Camera, Heart, Star, Sparkles, RotateCcw, X } from 'lucide-react';
 
 const polaroidImages = [
   {
-    url: 'https://ibb.co/0RcFLbQV?auto=compress&cs=tinysrgb&w=400'',
+    url: 'https://ibb.co/0RcFLbQV?auto=compress&cs=tinysrgb&w=400',
     caption: 'Living my best life with style ✨',
     mood: 'Main Character Energy'
   },
