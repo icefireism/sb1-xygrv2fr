@@ -41,6 +41,10 @@
   .bg-gradient-radial {
     background: radial-gradient(circle, var(--tw-gradient-stops));
   }
+
+  .developing-bar {
+    animation: developingProgress 3s ease-out forwards;
+  }
 }
 
 @keyframes slideInUp {
@@ -130,6 +134,15 @@
   75% {
     transform: translateY(-10px) rotate(270deg) scale(1.05);
     opacity: 0.9;
+  }
+}
+
+@keyframes developingProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
   }
 }
 
