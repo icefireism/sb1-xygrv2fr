@@ -3,7 +3,7 @@ import { Camera, Heart, Star, Sparkles, RotateCcw, X } from 'lucide-react';
 
 const polaroidImages = [
   {
-    url: '/polaroid-photo.png',
+    url: '/custom-polaroid.png',
     caption: 'Living my best life with style ✨',
     mood: 'Main Character Energy'
   },
