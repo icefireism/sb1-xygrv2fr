@@ -207,7 +207,7 @@ export const PolaroidOfTheDay: React.FC<PolaroidOfTheDayProps> = ({ isVisible, o
       <div className={`relative transform transition-all duration-1000 ease-out ${
         polaroidPhase === 'hidden' ? 'scale-0 opacity-0 rotate-45 translate-y-[-100px]' :
         polaroidPhase === 'dropping' ? 'scale-100 opacity-100 rotate-12 translate-y-0' :
-        polaroidPhase === 'developing' ? `scale-100 opacity-100 rotate-6 translate-y-0 ${showShake ? 'animate-bounce' : ''}` :
+        polaroidPhase === 'developing' ? `scale-100 opacity-100 rotate-6 translate-y-0 ${showShake ? 'animate-pulse' : ''}` :
         polaroidPhase === 'revealed' ? 'scale-100 opacity-100 rotate-3 translate-y-0' :
         'scale-75 opacity-0 rotate-45 translate-y-[100px]'
       }`}>
