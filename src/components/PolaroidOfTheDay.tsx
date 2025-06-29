@@ -3,6 +3,11 @@ import { Camera, Heart, Star, Sparkles, RotateCcw, X } from 'lucide-react';
 
 const polaroidImages = [
   {
+    url: '/polaroid-photo.png',
+    caption: 'Living my best life with style ✨',
+    mood: 'Main Character Energy'
+  },
+  {
     url: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=400',
     caption: 'Chasing sunsets and dreams ✨',
     mood: 'Golden Hour Magic'
@@ -56,11 +61,6 @@ const polaroidImages = [
     url: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=400',
     caption: 'Mountain peaks and endless possibilities ⛰️',
     mood: 'Summit Dreams'
-  },
-  {
-    url: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400',
-    caption: 'Stargazing and soul searching ⭐',
-    mood: 'Cosmic Wonder'
   }
 ];
 
