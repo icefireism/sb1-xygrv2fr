@@ -78,51 +78,31 @@ interface PolaroidOfTheDayProps {
 }
 
 export const PolaroidOfTheDay: React.FC<PolaroidOfTheDayProps> = ({ isVisible, onClose }) => {
-  const [polaroidPhase, setPolaroidPhase] = useState<'hidden' | 'dropping' | 'developing' | 'revealed' | 'closing'>('hidden');
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [showShake, setShowShake] = useState(false);
   const [flashEffect, setFlashEffect] = useState(false);
   const [canClose, setCanClose] = useState(false);
+  const [showPolaroid, setShowPolaroid] = useState(false);
   const polaroid = getDailyPolaroid();
 
   useEffect(() => {
     if (isVisible) {
       document.body.style.overflow = 'hidden';
       
-      // Start the sequence
+      // Flash effect immediately
+      setFlashEffect(true);
+      setTimeout(() => setFlashEffect(false), 200);
+      
+      // Show polaroid after flash
       setTimeout(() => {
-        setPolaroidPhase('dropping');
-        
-        // Flash effect when polaroid "takes the photo"
-        setTimeout(() => {
-          setFlashEffect(true);
-          setTimeout(() => setFlashEffect(false), 200);
-        }, 800);
-        
-        // Start developing phase
-        setTimeout(() => {
-          setPolaroidPhase('developing');
-          
-          // Shake effect during development
-          setTimeout(() => {
-            setShowShake(true);
-            setTimeout(() => setShowShake(false), 1000);
-          }, 500);
-          
-          // Reveal the image
-          setTimeout(() => {
-            setPolaroidPhase('revealed');
-            setCanClose(true);
-          }, 3000);
-        }, 1500);
+        setShowPolaroid(true);
+        setCanClose(true);
       }, 300);
     } else {
       document.body.style.overflow = 'unset';
-      setPolaroidPhase('hidden');
       setImageLoaded(false);
-      setShowShake(false);
       setFlashEffect(false);
       setCanClose(false);
+      setShowPolaroid(false);
     }
 
     return () => {
@@ -132,11 +112,7 @@ export const PolaroidOfTheDay: React.FC<PolaroidOfTheDayProps> = ({ isVisible, o
 
   const handleClose = () => {
     if (!canClose) return;
-    
-    setPolaroidPhase('closing');
-    setTimeout(() => {
-      onClose();
-    }, 600);
+    onClose();
   };
 
   const handleImageLoad = () => {
@@ -204,12 +180,8 @@ export const PolaroidOfTheDay: React.FC<PolaroidOfTheDayProps> = ({ isVisible, o
       </div>
 
       {/* Main Polaroid Container */}
-      <div className={`relative transform transition-all duration-1000 ease-out ${
-        polaroidPhase === 'hidden' ? 'scale-0 opacity-0 rotate-45 translate-y-[-100px]' :
-        polaroidPhase === 'dropping' ? 'scale-100 opacity-100 rotate-12 translate-y-0' :
-        polaroidPhase === 'developing' ? `scale-100 opacity-100 rotate-6 translate-y-0 ${showShake ? 'animate-pulse' : ''}` :
-        polaroidPhase === 'revealed' ? 'scale-100 opacity-100 rotate-3 translate-y-0' :
-        'scale-75 opacity-0 rotate-45 translate-y-[100px]'
+      <div className={`relative transform transition-all duration-500 ease-out ${
+        showPolaroid ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
       }`}>
         
         {/* Polaroid Shadow */}
@@ -255,117 +227,67 @@ export const PolaroidOfTheDay: React.FC<PolaroidOfTheDayProps> = ({ isVisible, o
           <div className="relative bg-white p-4">
             <div className="relative aspect-square bg-gray-100 rounded overflow-hidden shadow-inner">
               
-              {/* Developing overlay */}
-              {polaroidPhase === 'developing' && (
-                <div className="absolute inset-0 z-10">
-                  {/* Chemical wash effect */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-300/60 to-gray-400/80 animate-pulse" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse" style={{ animationDelay: '0.5s' }} />
-                  
-                  {/* Development progress bars */}
-                  <div className="absolute bottom-4 left-4 right-4 space-y-2">
-                    <div className="bg-black/20 rounded-full h-1 overflow-hidden">
-                      <div className="bg-red-400 h-full rounded-full animate-pulse developing-bar" style={{ animationDuration: '3s' }} />
-                    </div>
-                    <div className="bg-black/20 rounded-full h-1 overflow-hidden">
-                      <div className="bg-yellow-400 h-full rounded-full animate-pulse developing-bar" style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
-                    </div>
-                    <div className="bg-black/20 rounded-full h-1 overflow-hidden">
-                      <div className="bg-blue-400 h-full rounded-full animate-pulse developing-bar" style={{ animationDuration: '3s', animationDelay: '1s' }} />
-                    </div>
-                  </div>
-                  
-                  {/* Development text */}
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                    <div className="bg-black/50 backdrop-blur-sm rounded-lg p-3">
-                      <p className="text-white font-bold text-sm animate-pulse" style={{ fontFamily: 'Courier New, monospace' }}>
-                        DEVELOPING...
-                      </p>
-                      <div className="flex justify-center space-x-1 mt-2">
-                        {[...Array(3)].map((_, i) => (
-                          <div 
-                            key={i} 
-                            className="w-2 h-2 bg-white rounded-full animate-pulse" 
-                            style={{ animationDelay: `${i * 0.3}s` }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-              
               {/* Actual Image */}
               <img
                 src={polaroid.url}
                 alt={polaroid.caption}
                 onLoad={handleImageLoad}
                 className={`w-full h-full object-cover transition-all duration-1000 ${
-                  polaroidPhase === 'revealed' && imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                  imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
                 }`}
               />
               
               {/* Vintage photo effects */}
-              {polaroidPhase === 'revealed' && (
-                <>
-                  {/* Vignette effect */}
-                  <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/20" />
-                  
-                  {/* Vintage color overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/10 via-transparent to-orange-200/10 mix-blend-overlay" />
-                  
-                  {/* Film grain */}
-                  <div className="absolute inset-0 opacity-20" style={{
-                    backgroundImage: `
-                      radial-gradient(circle at 25% 25%, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
-                      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '4px 4px, 6px 6px'
-                  }} />
-                </>
-              )}
+              <>
+                {/* Vignette effect */}
+                <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/20" />
+                
+                {/* Vintage color overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/10 via-transparent to-orange-200/10 mix-blend-overlay" />
+                
+                {/* Film grain */}
+                <div className="absolute inset-0 opacity-20" style={{
+                  backgroundImage: `
+                    radial-gradient(circle at 25% 25%, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
+                    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+                  `,
+                  backgroundSize: '4px 4px, 6px 6px'
+                }} />
+              </>
             </div>
           </div>
 
           {/* Caption Area */}
           <div className="bg-white p-4 border-t border-gray-100">
-            {polaroidPhase === 'revealed' ? (
-              <div className="space-y-3">
-                {/* Mood Badge */}
-                <div className="flex items-center space-x-2">
-                  <div className="bg-gradient-to-r from-pink-400 to-purple-400 text-white px-3 py-1 rounded-full text-xs font-bold">
-                    {polaroid.mood}
-                  </div>
-                  <div className="flex space-x-1">
-                    {[...Array(3)].map((_, i) => (
-                      <Sparkles 
-                        key={i} 
-                        className="w-3 h-3 text-yellow-400 animate-pulse" 
-                        style={{ animationDelay: `${i * 0.2}s` }}
-                      />
-                    ))}
-                  </div>
+            <div className="space-y-3">
+              {/* Mood Badge */}
+              <div className="flex items-center space-x-2">
+                <div className="bg-gradient-to-r from-pink-400 to-purple-400 text-white px-3 py-1 rounded-full text-xs font-bold">
+                  {polaroid.mood}
                 </div>
-                
-                {/* Caption */}
-                <p className="text-gray-700 font-medium text-center italic" style={{ fontFamily: 'Courier New, monospace' }}>
-                  "{polaroid.caption}"
-                </p>
-                
-                {/* Signature */}
-                <div className="text-center pt-2 border-t border-gray-200">
-                  <p className="text-gray-500 text-xs" style={{ fontFamily: 'Courier New, monospace' }}>
-                    Captured with ❤️ for July 12th
-                  </p>
+                <div className="flex space-x-1">
+                  {[...Array(3)].map((_, i) => (
+                    <Sparkles 
+                      key={i} 
+                      className="w-3 h-3 text-yellow-400 animate-pulse" 
+                      style={{ animationDelay: `${i * 0.2}s` }}
+                    />
+                  ))}
                 </div>
               </div>
-            ) : (
-              <div className="h-20 bg-gray-50 rounded animate-pulse flex items-center justify-center">
-                <p className="text-gray-400 text-sm" style={{ fontFamily: 'Courier New, monospace' }}>
-                  Caption developing...
+              
+              {/* Caption */}
+              <p className="text-gray-700 font-medium text-center italic" style={{ fontFamily: 'Courier New, monospace' }}>
+                "{polaroid.caption}"
+              </p>
+              
+              {/* Signature */}
+              <div className="text-center pt-2 border-t border-gray-200">
+                <p className="text-gray-500 text-xs" style={{ fontFamily: 'Courier New, monospace' }}>
+                  Captured with ❤️ for July 12th
                 </p>
               </div>
-            )}
+            </div>
           </div>
 
           {/* Polaroid Brand Strip */}
@@ -373,24 +295,22 @@ export const PolaroidOfTheDay: React.FC<PolaroidOfTheDayProps> = ({ isVisible, o
         </div>
 
         {/* Floating Hearts Effect */}
-        {polaroidPhase === 'revealed' && (
-          <div className="absolute inset-0 pointer-events-none">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div
-                key={i}
-                className="absolute animate-float"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 2}s`,
-                  animationDuration: `${2 + Math.random() * 2}s`,
-                }}
-              >
-                <Heart className="w-4 h-4 text-pink-400 opacity-60" />
-              </div>
-            ))}
-          </div>
-        )}
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute animate-float"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 2}s`,
+                animationDuration: `${2 + Math.random() * 2}s`,
+              }}
+            >
+              <Heart className="w-4 h-4 text-pink-400 opacity-60" />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Close Instruction */}
