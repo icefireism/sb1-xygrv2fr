@@ -8,22 +8,22 @@ const polaroidImages = [
     mood: 'Main Character Energy'
   },
   {
-    url: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=400',
+    url: 'https://i.ibb.co/0RcFLbQV/polaroid-photo.png',
     caption: 'Chasing sunsets and dreams ✨',
     mood: 'Golden Hour Magic'
   },
   {
-    url: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&w=400',
+    url: 'https://i.ibb.co/0RcFLbQV/polaroid-photo.png',
     caption: 'Coffee and contemplation ☕',
     mood: 'Cozy Vibes'
   },
   {
-    url: 'https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=400',
+    url: 'https://i.ibb.co/0RcFLbQV/polaroid-photo.png',
     caption: 'Adventure awaits around every corner 🌟',
     mood: 'Wanderlust'
   },
   {
-    url: 'https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=400',
+    url: 'https://i.ibb.co/0RcFLbQV/polaroid-photo.png',
     caption: 'Finding beauty in simple moments 🌸',
     mood: 'Peaceful Bliss'
   },
