@@ -347,21 +347,6 @@ export const BirthdayProphecyScroll: React.FC = () => {
                         </div>
                       </div>
                     </div>
-
-                    {/* Close instruction */}
-                    {canClose && (
-                      <div className={`mt-8 text-center transition-all duration-1000 ${
-                        canClose ? 'opacity-100' : 'opacity-0'
-                      }`}>
-                        <div className="bg-amber-100/50 border border-amber-300/50 rounded-lg p-3">
-                          <p className="text-amber-700 text-sm font-medium" style={{
-                            fontFamily: 'Cinzel, serif'
-                          }}>
-                            ✦ Click anywhere to close the sacred scroll ✦
-                          </p>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
@@ -414,6 +399,15 @@ export const BirthdayProphecyScroll: React.FC = () => {
               )}
             </div>
           </div>
+
+          {/* Close Instruction - Below the scroll */}
+          {canClose && (
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+              <div className="bg-amber-900/80 backdrop-blur-sm text-amber-100 px-6 py-3 rounded-full text-sm animate-pulse border border-amber-600/50 shadow-lg" style={{ fontFamily: 'Cinzel, serif' }}>
+                ✦ Click anywhere to close the sacred scroll ✦
+              </div>
+            </div>
+          )}
         </div>
       )}
 
