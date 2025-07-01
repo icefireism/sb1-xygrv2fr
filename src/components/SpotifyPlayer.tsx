@@ -20,8 +20,8 @@ const songs: Song[] = [
   },
   {
     id: '2',
-    title: 'Song 2', 
-    artist: 'Artist 2',
+    title: 'From the Start', 
+    artist: 'Laufey',
     spotifyUrl: 'https://open.spotify.com/track/43iIQbw5hx986dUEZbr3eN',
     embedUrl: 'https://open.spotify.com/embed/track/43iIQbw5hx986dUEZbr3eN?utm_source=generator'
   }
