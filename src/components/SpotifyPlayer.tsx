@@ -13,10 +13,10 @@ interface Song {
 const songs: Song[] = [
   {
     id: '1',
-    title: 'Song 1',
-    artist: 'Artist 1',
-    spotifyUrl: 'https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh', // Replace with your link
-    embedUrl: 'https://open.spotify.com/embed/track/4iV5W9uYEdYUVa79Axb7Rh?utm_source=generator&theme=0'
+    title: 'her',
+    artist: 'JVKE',
+    spotifyUrl: 'https://open.spotify.com/track/6G9YlbU3ByPJQvOFDRdwyM?si=nV_9X8XOQFCdnYdmJBJ--w', // Replace with your link
+    embedUrl: 'https://open.spotify.com/track/6G9YlbU3ByPJQvOFDRdwyM?si=nV_9X8XOQFCdnYdmJBJ--w'
   },
   {
     id: '2',
