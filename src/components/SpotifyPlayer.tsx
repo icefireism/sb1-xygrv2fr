@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Music, Play, Pause, SkipForward, SkipBack, Volume2, Heart } from 'lucide-react';
+import { Music, Play, Pause, SkipForward, SkipBack, Volume2, Heart, ExternalLink } from 'lucide-react';
 
 interface Song {
   id: string;
@@ -30,36 +30,38 @@ const songs: Song[] = [
 export const SpotifyPlayer: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [showPlayer, setShowPlayer] = useState(false);
+  const [embedError, setEmbedError] = useState(false);
+  const [showEmbed, setShowEmbed] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
 
   const currentSong = songs[currentSongIndex];
 
   useEffect(() => {
-    if (showPlayer) {
+    if (showEmbed) {
       // Force iframe reload when song changes
       setIframeKey(prev => prev + 1);
+      setEmbedError(false);
     }
-  }, [currentSongIndex, showPlayer]);
+  }, [currentSongIndex, showEmbed]);
 
   const nextSong = () => {
     setCurrentSongIndex((prev) => (prev + 1) % songs.length);
-    setIsPlaying(false);
   };
 
   const previousSong = () => {
     setCurrentSongIndex((prev) => (prev - 1 + songs.length) % songs.length);
-    setIsPlaying(false);
   };
 
-  const togglePlayer = () => {
-    setShowPlayer(!showPlayer);
-    setIsPlaying(false);
+  const toggleEmbed = () => {
+    setShowEmbed(!showEmbed);
   };
 
   const openInSpotify = () => {
     window.open(currentSong.spotifyUrl, '_blank');
+  };
+
+  const handleIframeError = () => {
+    setEmbedError(true);
   };
 
   return (
@@ -117,13 +119,13 @@ export const SpotifyPlayer: React.FC = () => {
                 onClick={openInSpotify}
                 className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center space-x-2"
               >
-                <Music className="w-4 h-4" />
+                <ExternalLink className="w-4 h-4" />
                 <span>Open in Spotify</span>
               </button>
             </div>
 
-            {/* Spotify Embed Player */}
-            {showPlayer && (
+            {/* Spotify Embed Player or Fallback */}
+            {showEmbed && !embedError ? (
               <div className="mb-4">
                 <iframe
                   key={iframeKey}
@@ -134,7 +136,53 @@ export const SpotifyPlayer: React.FC = () => {
                   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                   loading="lazy"
                   className="rounded-lg"
+                  onError={handleIframeError}
+                  title={`Spotify player for ${currentSong.title}`}
                 ></iframe>
+              </div>
+            ) : showEmbed && embedError ? (
+              <div className="mb-4 bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+                <div className="text-center">
+                  <Music className="w-8 h-8 text-red-400 mx-auto mb-2" />
+                  <p className="text-red-300 text-sm mb-3">
+                    Spotify embed couldn't load. This is common due to browser restrictions.
+                  </p>
+                  <button
+                    onClick={openInSpotify}
+                    className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center space-x-2 mx-auto"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>Listen on Spotify</span>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="mb-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-lg p-6">
+                <div className="text-center">
+                  <div className="bg-gradient-to-r from-green-400 to-emerald-400 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                    <Music className="w-8 h-8 text-white" />
+                  </div>
+                  <h5 className="text-white font-semibold text-lg mb-2">
+                    {currentSong.title}
+                  </h5>
+                  <p className="text-white/70 mb-4">by {currentSong.artist}</p>
+                  <div className="flex justify-center space-x-3">
+                    <button
+                      onClick={toggleEmbed}
+                      className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center space-x-2"
+                    >
+                      <Play className="w-4 h-4" />
+                      <span>Try Embed Player</span>
+                    </button>
+                    <button
+                      onClick={openInSpotify}
+                      className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center space-x-2"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>Open in Spotify</span>
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -149,14 +197,10 @@ export const SpotifyPlayer: React.FC = () => {
               </button>
 
               <button
-                onClick={togglePlayer}
+                onClick={openInSpotify}
                 className="p-4 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-full transition-all duration-200 hover:scale-110 shadow-lg"
               >
-                {showPlayer ? (
-                  <Pause className="w-6 h-6 text-white" />
-                ) : (
-                  <Play className="w-6 h-6 text-white ml-1" />
-                )}
+                <Play className="w-6 h-6 text-white ml-1" />
               </button>
 
               <button
@@ -203,17 +247,15 @@ export const SpotifyPlayer: React.FC = () => {
                       <p className="text-white/60 text-sm">{song.artist}</p>
                     </div>
                   </div>
-                  {currentSongIndex === index && (
-                    <div className="flex space-x-1">
-                      {[...Array(3)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="w-1 h-4 bg-green-400 rounded-full animate-pulse"
-                          style={{ animationDelay: `${i * 0.2}s` }}
-                        />
-                      ))}
-                    </div>
-                  )}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(song.spotifyUrl, '_blank');
+                    }}
+                    className="p-2 bg-green-500/20 hover:bg-green-500/30 rounded-full transition-colors duration-200"
+                  >
+                    <ExternalLink className="w-4 h-4 text-green-300" />
+                  </button>
                 </div>
               </button>
             ))}
@@ -222,7 +264,7 @@ export const SpotifyPlayer: React.FC = () => {
           {/* Instructions */}
           <div className="mt-6 p-4 bg-white/5 rounded-lg border border-white/10">
             <p className="text-white/70 text-sm text-center">
-              🎵 Click play to enjoy the embedded Spotify player, or open in Spotify for the full experience
+              🎵 Due to browser restrictions, Spotify embeds may not always work. Click "Open in Spotify" for the best listening experience!
             </p>
           </div>
         </div>
