@@ -6,6 +6,7 @@ import { DailyQuote } from './components/DailyQuote';
 import { VirtualCakeBuilder } from './components/VirtualCakeBuilder';
 import { HugGenerator } from './components/HugGenerator';
 import { BirthdayProphecyScroll } from './components/BirthdayProphecyScroll';
+import { SpotifyPlayer } from './components/SpotifyPlayer';
 import { Calendar, Clock } from 'lucide-react';
 
 function App() {
@@ -60,6 +61,9 @@ function App() {
 
           {/* Hug Generator */}
           <HugGenerator />
+
+          {/* Spotify Player */}
+          <SpotifyPlayer />
 
           {/* Virtual Cake Builder */}
           <VirtualCakeBuilder isCountdownExpired={isExpired} />
