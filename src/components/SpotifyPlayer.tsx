@@ -15,15 +15,15 @@ const songs: Song[] = [
     id: '1',
     title: 'her',
     artist: 'JVKE',
-    spotifyUrl: 'https://open.spotify.com/track/6G9YlbU3ByPJQvOFDRdwyM',
-    embedUrl: 'https://open.spotify.com/embed/track/6G9YlbU3ByPJQvOFDRdwyM?utm_source=generator'
+    spotifyUrl: 'https://open.spotify.com/track/6G9YlbU3ByPJQvOFDRdwyM?si=c7dfba553b424a50',
+    embedUrl: 'https://open.spotify.com/embed/track/6G9YlbU3ByPJQvOFDRdwyM?utm_source=generator&theme=0'
   },
   {
     id: '2',
     title: 'From the Start', 
     artist: 'Laufey',
-    spotifyUrl: 'https://open.spotify.com/track/43iIQbw5hx986dUEZbr3eN',
-    embedUrl: 'https://open.spotify.com/embed/track/43iIQbw5hx986dUEZbr3eN?utm_source=generator'
+    spotifyUrl: 'https://open.spotify.com/track/43iIQbw5hx986dUEZbr3eN?si=e3c4226c015f45ce',
+    embedUrl: 'https://open.spotify.com/embed/track/43iIQbw5hx986dUEZbr3eN?utm_source=generator&theme=0'
   }
 ];
 
