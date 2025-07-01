@@ -9,7 +9,7 @@ interface Song {
   embedUrl: string;
 }
 
-// You can replace these with your actual Spotify links
+// Updated with your provided Spotify links
 const songs: Song[] = [
   {
     id: '1',
@@ -22,8 +22,8 @@ const songs: Song[] = [
     id: '2',
     title: 'Song 2', 
     artist: 'Artist 2',
-    spotifyUrl: 'https://open.spotify.com/track/1A8mOUl9phYxNq5eFjVVnQ', // Replace with your link
-    embedUrl: 'https://open.spotify.com/embed/track/1A8mOUl9phYxNq5eFjVVnQ?utm_source=generator&theme=0'
+    spotifyUrl: 'https://open.spotify.com/track/43iIQbw5hx986dUEZbr3eN',
+    embedUrl: 'https://open.spotify.com/embed/track/43iIQbw5hx986dUEZbr3eN?utm_source=generator'
   }
 ];
 
