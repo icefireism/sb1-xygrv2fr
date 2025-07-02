@@ -5,7 +5,6 @@ import { FloatingElements } from './components/FloatingElements';
 import { DailyQuote } from './components/DailyQuote';
 import { VirtualCakeBuilder } from './components/VirtualCakeBuilder';
 import { HugGenerator } from './components/HugGenerator';
-import { BirthdayProphecyScroll } from './components/BirthdayProphecyScroll';
 import { SpotifyPlayer } from './components/SpotifyPlayer';
 import { Calendar, Clock } from 'lucide-react';
 
@@ -23,9 +22,6 @@ function App() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Birthday Prophecy Scroll - appears on load */}
-      <BirthdayProphecyScroll />
-
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
         <div className="absolute inset-0 bg-gradient-to-tr from-purple-800/30 via-transparent to-blue-800/30 animate-pulse"></div>
