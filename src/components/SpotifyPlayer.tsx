@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Music, Play, Pause, SkipForward, SkipBack, Volume2, Heart, ExternalLink, Shuffle, Repeat, Clock, User } from 'lucide-react';
+import { Music, Play, Pause, SkipForward, SkipBack, Volume2, Heart, Shuffle, Repeat, Clock, User } from 'lucide-react';
 
 interface Song {
   id: string;
@@ -7,7 +7,6 @@ interface Song {
   artist: string;
   album?: string;
   duration?: string;
-  spotifyUrl: string;
   embedUrl: string;
   mood?: string;
   color?: string;
@@ -21,7 +20,6 @@ const songs: Song[] = [
     artist: 'JVKE',
     album: 'this is what ____ feels like (Vol. 1-4)',
     duration: '2:58',
-    spotifyUrl: 'https://open.spotify.com/track/6G9YlbU3ByPJQvOFDRdwyM?si=c7dfba553b424a50',
     embedUrl: 'https://open.spotify.com/embed/track/6G9YlbU3ByPJQvOFDRdwyM?utm_source=generator&theme=0',
     mood: 'Emotional & Heartfelt',
     color: 'from-blue-500 to-indigo-600'
@@ -32,7 +30,6 @@ const songs: Song[] = [
     artist: 'Laufey',
     album: 'Bewitched',
     duration: '3:38',
-    spotifyUrl: 'https://open.spotify.com/track/43iIQbw5hx986dUEZbr3eN?si=e3c4226c015f45ce',
     embedUrl: 'https://open.spotify.com/embed/track/43iIQbw5hx986dUEZbr3eN?utm_source=generator&theme=0',
     mood: 'Jazz & Nostalgic',
     color: 'from-amber-500 to-orange-600'
@@ -43,7 +40,6 @@ export const SpotifyPlayer: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [embedError, setEmbedError] = useState(false);
-  const [showEmbed, setShowEmbed] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isShuffled, setIsShuffled] = useState(false);
@@ -53,15 +49,14 @@ export const SpotifyPlayer: React.FC = () => {
   const currentSong = songs[currentSongIndex];
 
   useEffect(() => {
-    if (showEmbed) {
-      setIframeKey(prev => prev + 1);
-      setEmbedError(false);
-    }
-  }, [currentSongIndex, showEmbed]);
+    setIframeKey(prev => prev + 1);
+    setEmbedError(false);
+  }, [currentSongIndex]);
 
   useEffect(() => {
     if (isOpen) {
       setShowVisualization(true);
+      setIsPlaying(true);
     } else {
       setShowVisualization(false);
       setIsPlaying(false);
@@ -83,16 +78,6 @@ export const SpotifyPlayer: React.FC = () => {
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
-    if (!showEmbed) {
-      openInSpotify();
-    }
-  };
-
-  const toggleEmbed = () => {
-    setShowEmbed(!showEmbed);
-    if (!showEmbed) {
-      setIsPlaying(true);
-    }
   };
 
   const toggleShuffle = () => {
@@ -105,19 +90,13 @@ export const SpotifyPlayer: React.FC = () => {
     setRepeatMode(modes[(currentIndex + 1) % modes.length]);
   };
 
-  const openInSpotify = () => {
-    window.open(currentSong.spotifyUrl, '_blank');
-  };
-
   const handleIframeError = () => {
     setEmbedError(true);
   };
 
   const selectSong = (index: number) => {
     setCurrentSongIndex(index);
-    if (showEmbed) {
-      setIsPlaying(true);
-    }
+    setIsPlaying(true);
   };
 
   const getRepeatIcon = () => {
@@ -244,18 +223,10 @@ export const SpotifyPlayer: React.FC = () => {
                     )}
                   </div>
                 </div>
-                
-                <button
-                  onClick={openInSpotify}
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center space-x-2 shadow-lg hover:shadow-green-500/25"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>Open in Spotify</span>
-                </button>
               </div>
 
               {/* Enhanced Player Controls */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
                   <button
                     onClick={toggleShuffle}
@@ -317,9 +288,9 @@ export const SpotifyPlayer: React.FC = () => {
                 </div>
               </div>
 
-              {/* Spotify Embed or Enhanced Fallback */}
+              {/* Spotify Embed Player */}
               <div className="mt-6">
-                {showEmbed && !embedError ? (
+                {!embedError ? (
                   <div className="relative">
                     <iframe
                       key={iframeKey}
@@ -333,40 +304,18 @@ export const SpotifyPlayer: React.FC = () => {
                       onError={handleIframeError}
                       title={`Spotify player for ${currentSong.title}`}
                     />
-                    <div className="absolute top-2 right-2">
-                      <button
-                        onClick={() => setShowEmbed(false)}
-                        className="bg-black/50 hover:bg-black/70 text-white p-1 rounded text-xs transition-colors duration-200"
-                      >
-                        ✕
-                      </button>
-                    </div>
                   </div>
-                ) : showEmbed && embedError ? (
+                ) : (
                   <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-6">
                     <div className="text-center">
                       <Music className="w-8 h-8 text-red-400 mx-auto mb-3" />
                       <p className="text-red-300 text-sm mb-4">
                         Spotify embed couldn't load due to browser restrictions.
                       </p>
-                      <button
-                        onClick={openInSpotify}
-                        className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center space-x-2 mx-auto"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        <span>Listen on Spotify</span>
-                      </button>
+                      <p className="text-white/70 text-xs">
+                        Try refreshing the page or using a different browser.
+                      </p>
                     </div>
-                  </div>
-                ) : (
-                  <div className="text-center">
-                    <button
-                      onClick={toggleEmbed}
-                      className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2 mx-auto border border-white/20"
-                    >
-                      <Play className="w-4 h-4" />
-                      <span>Try Spotify Embed Player</span>
-                    </button>
                   </div>
                 )}
               </div>
@@ -443,15 +392,6 @@ export const SpotifyPlayer: React.FC = () => {
                       </div>
                       
                       <div className="flex items-center space-x-2">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(song.spotifyUrl, '_blank');
-                          }}
-                          className="p-2 bg-green-500/20 hover:bg-green-500/30 rounded-full transition-colors duration-200 opacity-0 group-hover:opacity-100"
-                        >
-                          <ExternalLink className="w-4 h-4 text-green-300" />
-                        </button>
                         <Heart className="w-4 h-4 text-white/40 hover:text-pink-400 transition-colors duration-200 cursor-pointer opacity-0 group-hover:opacity-100" />
                       </div>
                     </div>
@@ -466,10 +406,10 @@ export const SpotifyPlayer: React.FC = () => {
                 <Music className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="text-white/90 text-sm font-medium mb-1">
-                    🎵 Enhanced Listening Experience
+                    🎵 Embedded Spotify Player
                   </p>
                   <p className="text-white/70 text-sm">
-                    Due to browser restrictions, Spotify embeds may not always work. For the best experience, click "Open in Spotify" to listen with full audio quality and features.
+                    Enjoy the music directly in the player above. If the embed doesn't load due to browser restrictions, try refreshing the page or switching to a different browser.
                   </p>
                 </div>
               </div>
