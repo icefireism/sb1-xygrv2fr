@@ -23,8 +23,8 @@ const songs: Song[] = [
     duration: '2:58',
     spotifyUrl: 'https://open.spotify.com/track/6G9YlbU3ByPJQvOFDRdwyM?si=c7dfba553b424a50',
     embedUrl: 'https://open.spotify.com/embed/track/6G9YlbU3ByPJQvOFDRdwyM?utm_source=generator&theme=0',
-    mood: 'Dreamy & Romantic',
-    color: 'from-pink-500 to-purple-600'
+    mood: 'Emotional & Heartfelt',
+    color: 'from-blue-500 to-indigo-600'
   },
   {
     id: '2',
