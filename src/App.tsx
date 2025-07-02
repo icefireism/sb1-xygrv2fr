@@ -5,7 +5,7 @@ import { FloatingElements } from './components/FloatingElements';
 import { DailyQuote } from './components/DailyQuote';
 import { VirtualCakeBuilder } from './components/VirtualCakeBuilder';
 import { HugGenerator } from './components/HugGenerator';
-import { BirthdayProphecyScroll } from './components/BirthdayProphecyScroll';
+import { PolaroidOfTheDay } from './components/PolaroidOfTheDay';
 import { SpotifyPlayer } from './components/SpotifyPlayer';
 import { Calendar, Clock } from 'lucide-react';
 
@@ -13,6 +13,7 @@ function App() {
   // Target date: July 12, 2025, 00:00:00 IST
   const targetDate = new Date('2025-07-12T00:00:00+05:30');
   const { days, hours, minutes, seconds, isExpired } = useCountdown(targetDate);
+  const [showPolaroid, setShowPolaroid] = React.useState(false);
 
   const countdownItems = [
     { value: days, label: 'Days' },
@@ -21,10 +22,23 @@ function App() {
     { value: seconds, label: 'Seconds' },
   ];
 
+  // Show polaroid after a delay when component mounts
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPolaroid(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handlePolaroidClose = () => {
+    setShowPolaroid(false);
+  };
+
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Birthday Prophecy Scroll - appears on load */}
-      <BirthdayProphecyScroll />
+      {/* Polaroid of the Day */}
+      <PolaroidOfTheDay isVisible={showPolaroid} onClose={handlePolaroidClose} />
 
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
