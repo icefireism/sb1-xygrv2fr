@@ -7,6 +7,7 @@ import { VirtualCakeBuilder } from './components/VirtualCakeBuilder';
 import { HugGenerator } from './components/HugGenerator';
 import { PolaroidOfTheDay } from './components/PolaroidOfTheDay';
 import { SpotifyPlayer } from './components/SpotifyPlayer';
+import { DynamicBackground } from './components/DynamicBackground';
 import { Calendar, Clock } from 'lucide-react';
 
 function App() {
@@ -40,12 +41,8 @@ function App() {
       {/* Polaroid of the Day */}
       <PolaroidOfTheDay isVisible={showPolaroid} onClose={handlePolaroidClose} />
 
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-        <div className="absolute inset-0 bg-gradient-to-tr from-purple-800/30 via-transparent to-blue-800/30 animate-pulse"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(120,119,198,0.3),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,105,180,0.2),transparent_50%)]"></div>
-      </div>
+      {/* Dynamic Time-Based Background */}
+      <DynamicBackground />
 
       {/* Floating Elements */}
       <FloatingElements />
@@ -113,10 +110,6 @@ function App() {
           </div>
         </div>
       </div>
-
-      {/* Gradient Orbs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
     </div>
   );
 }
