@@ -8,6 +8,7 @@ import { HugGenerator } from './components/HugGenerator';
 import { PolaroidOfTheDay } from './components/PolaroidOfTheDay';
 import { SpotifyPlayer } from './components/SpotifyPlayer';
 import { DynamicBackground } from './components/DynamicBackground';
+import { ConfettiCannon } from './components/ConfettiCannon';
 import { Calendar, Clock } from 'lucide-react';
 
 function App() {
@@ -72,6 +73,9 @@ function App() {
 
           {/* Hug Generator */}
           <HugGenerator />
+
+          {/* Confetti Cannon */}
+          <ConfettiCannon />
 
           {/* Spotify Player */}
           <SpotifyPlayer />
