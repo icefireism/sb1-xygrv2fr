@@ -57,7 +57,7 @@ export const DynamicBackground: React.FC = () => {
             <div className="absolute inset-2 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
             <div className="absolute inset-4 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
           </div>,
-          // Dawn clouds
+          // Dawn clouds - reduced to 4
           ...Array.from({ length: 4 }).map((_, i) => (
             <div
               key={`dawn-cloud-${i}`}
@@ -100,8 +100,8 @@ export const DynamicBackground: React.FC = () => {
           <div key="morning-overcast" className="absolute top-16 right-16 w-40 h-40 bg-gradient-to-br from-gray-300 via-gray-400 to-gray-500 rounded-full opacity-60 blur-xl">
             <div className="absolute inset-0 bg-gray-300 rounded-full blur-2xl opacity-40 animate-pulse" />
           </div>,
-          // Heavy rain clouds
-          ...Array.from({ length: 8 }).map((_, i) => (
+          // Heavy rain clouds - reduced to 4
+          ...Array.from({ length: 4 }).map((_, i) => (
             <div
               key={`morning-rain-cloud-${i}`}
               className="absolute animate-float opacity-70"
@@ -157,8 +157,8 @@ export const DynamicBackground: React.FC = () => {
           <div key="afternoon-overcast" className="absolute top-12 right-12 w-44 h-44 bg-gradient-to-br from-gray-400 via-gray-500 to-gray-600 rounded-full opacity-70 blur-2xl">
             <div className="absolute inset-0 bg-gray-400 rounded-full blur-3xl opacity-50 animate-pulse" />
           </div>,
-          // Storm clouds
-          ...Array.from({ length: 10 }).map((_, i) => (
+          // Storm clouds - reduced to 5
+          ...Array.from({ length: 5 }).map((_, i) => (
             <div
               key={`afternoon-storm-cloud-${i}`}
               className="absolute animate-float opacity-80"
@@ -217,7 +217,7 @@ export const DynamicBackground: React.FC = () => {
             <div className="absolute inset-2 bg-gradient-to-br from-orange-300 to-red-400 rounded-full" />
             <div className="absolute inset-4 bg-gradient-to-br from-orange-200 to-orange-300 rounded-full animate-pulse" />
           </div>,
-          // Evening clouds with golden edges
+          // Evening clouds with golden edges - reduced to 4
           ...Array.from({ length: 4 }).map((_, i) => (
             <div
               key={`evening-cloud-${i}`}
@@ -283,7 +283,7 @@ export const DynamicBackground: React.FC = () => {
               <Star className="w-3 h-3 text-yellow-200" />
             </div>
           )),
-          // Night clouds
+          // Night clouds - reduced to 3
           ...Array.from({ length: 3 }).map((_, i) => (
             <div
               key={`night-cloud-${i}`}
@@ -345,7 +345,7 @@ export const DynamicBackground: React.FC = () => {
               <div className="w-1 h-1 bg-gray-300 rounded-full" />
             </div>
           )),
-          // Night mist
+          // Night mist - reduced to 4
           ...Array.from({ length: 4 }).map((_, i) => (
             <div
               key={`late-mist-${i}`}
