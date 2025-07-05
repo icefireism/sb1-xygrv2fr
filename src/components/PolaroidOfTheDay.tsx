@@ -1,75 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Camera, Heart, Star, Sparkles, RotateCcw, X } from 'lucide-react';
 
-const polaroidImages = [
-  {
-    url: 'https://i.ibb.co/0RcFLbQV/polaroid-photo.png',
-    caption: 'Living my best life with style ✨',
-    mood: 'Main Character Energy'
-  },
-  {
-    url: 'https://i.ibb.co/0RcFLbQV/polaroid-photo.png',
-    caption: 'Chasing sunsets and dreams ✨',
-    mood: 'Golden Hour Magic'
-  },
-  {
-    url: 'https://i.ibb.co/0RcFLbQV/polaroid-photo.png',
-    caption: 'Coffee and contemplation ☕',
-    mood: 'Cozy Vibes'
-  },
-  {
-    url: 'https://i.ibb.co/0RcFLbQV/polaroid-photo.png',
-    caption: 'Adventure awaits around every corner 🌟',
-    mood: 'Wanderlust'
-  },
-  {
-    url: 'https://i.ibb.co/0RcFLbQV/polaroid-photo.png',
-    caption: 'Finding beauty in simple moments 🌸',
-    mood: 'Peaceful Bliss'
-  },
-  {
-    url: 'https://images.pexels.com/photos/1559821/pexels-photo-1559821.jpeg?auto=compress&cs=tinysrgb&w=400',
-    caption: 'Dancing through life with joy 💃',
-    mood: 'Pure Happiness'
-  },
-  {
-    url: 'https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&w=400',
-    caption: 'Ocean waves and salty dreams 🌊',
-    mood: 'Seaside Serenity'
-  },
-  {
-    url: 'https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=400',
-    caption: 'City lights and midnight thoughts 🌃',
-    mood: 'Urban Explorer'
-  },
-  {
-    url: 'https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=400',
-    caption: 'Nature\'s masterpiece in bloom 🌺',
-    mood: 'Garden Paradise'
-  },
-  {
-    url: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=400',
-    caption: 'Sweet treats and sweeter memories 🧁',
-    mood: 'Sugar Rush'
-  },
-  {
-    url: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=400',
-    caption: 'Books, blankets, and beautiful stories 📚',
-    mood: 'Cozy Corner'
-  },
-  {
-    url: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=400',
-    caption: 'Mountain peaks and endless possibilities ⛰️',
-    mood: 'Summit Dreams'
-  }
-];
-
-const getDailyPolaroid = () => {
-  const now = new Date();
-  const referenceDate = new Date('2025-01-01');
-  const daysDifference = Math.floor((now.getTime() - referenceDate.getTime()) / (1000 * 60 * 60 * 24));
-  const polaroidIndex = daysDifference % polaroidImages.length;
-  return polaroidImages[polaroidIndex];
+// Fixed polaroid data - no longer changes daily
+const fixedPolaroid = {
+  url: '/custom-polaroid.png', // Using the custom polaroid image from your public folder
+  caption: 'Living my best life with style ✨',
+  mood: 'Main Character Energy'
 };
 
 interface PolaroidOfTheDayProps {
@@ -82,7 +18,6 @@ export const PolaroidOfTheDay: React.FC<PolaroidOfTheDayProps> = ({ isVisible, o
   const [flashEffect, setFlashEffect] = useState(false);
   const [canClose, setCanClose] = useState(false);
   const [showPolaroid, setShowPolaroid] = useState(false);
-  const polaroid = getDailyPolaroid();
 
   useEffect(() => {
     if (isVisible) {
@@ -229,8 +164,8 @@ export const PolaroidOfTheDay: React.FC<PolaroidOfTheDayProps> = ({ isVisible, o
               
               {/* Actual Image */}
               <img
-                src={polaroid.url}
-                alt={polaroid.caption}
+                src={fixedPolaroid.url}
+                alt={fixedPolaroid.caption}
                 onLoad={handleImageLoad}
                 className={`w-full h-full object-cover transition-all duration-1000 ${
                   imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
@@ -263,7 +198,7 @@ export const PolaroidOfTheDay: React.FC<PolaroidOfTheDayProps> = ({ isVisible, o
               {/* Mood Badge */}
               <div className="flex items-center space-x-2">
                 <div className="bg-gradient-to-r from-pink-400 to-purple-400 text-white px-3 py-1 rounded-full text-xs font-bold">
-                  {polaroid.mood}
+                  {fixedPolaroid.mood}
                 </div>
                 <div className="flex space-x-1">
                   {[...Array(3)].map((_, i) => (
@@ -278,7 +213,7 @@ export const PolaroidOfTheDay: React.FC<PolaroidOfTheDayProps> = ({ isVisible, o
               
               {/* Caption */}
               <p className="text-gray-700 font-medium text-center italic" style={{ fontFamily: 'Courier New, monospace' }}>
-                "{polaroid.caption}"
+                "{fixedPolaroid.caption}"
               </p>
               
               {/* Signature */}
