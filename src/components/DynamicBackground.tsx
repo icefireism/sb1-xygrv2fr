@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Cloud, Star, Sparkles } from 'lucide-react';
+import { Sun, Moon, Cloud, Star, Sparkles, CloudRain, CloudDrizzle } from 'lucide-react';
 
 interface TimeOfDay {
   period: 'dawn' | 'morning' | 'afternoon' | 'evening' | 'night' | 'lateNight';
@@ -91,119 +91,115 @@ export const DynamicBackground: React.FC = () => {
       },
       morning: {
         colors: {
-          primary: 'from-blue-400 via-cyan-300 to-yellow-300',
-          secondary: 'from-blue-300/30 via-cyan-200/20 to-yellow-200/30',
-          accent: 'from-cyan-400/20 via-blue-300/15 to-yellow-200/20'
+          primary: 'from-gray-600 via-gray-500 to-blue-400',
+          secondary: 'from-gray-500/40 via-blue-400/30 to-gray-400/30',
+          accent: 'from-blue-400/25 via-gray-400/20 to-white/15'
         },
         elements: [
-          // Bright morning sun
-          <div key="morning-sun" className="absolute top-16 right-16 w-40 h-40 bg-gradient-to-br from-yellow-300 via-yellow-400 to-orange-400 rounded-full opacity-90">
-            <div className="absolute inset-0 bg-yellow-300 rounded-full blur-xl opacity-50 animate-pulse" />
-            <div className="absolute inset-2 bg-gradient-to-br from-yellow-200 to-yellow-300 rounded-full" />
-            <div className="absolute inset-4 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-full animate-pulse" />
-            {/* Sun rays */}
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div
-                key={`sun-ray-${i}`}
-                className="absolute w-1 h-20 bg-gradient-to-t from-yellow-400 to-transparent opacity-60 animate-pulse"
-                style={{
-                  top: '-40px',
-                  left: '50%',
-                  transformOrigin: 'bottom center',
-                  transform: `translateX(-50%) rotate(${i * 45}deg)`,
-                  animationDelay: `${i * 0.2}s`
-                }}
-              />
-            ))}
+          // Overcast sky with hidden sun
+          <div key="morning-overcast" className="absolute top-16 right-16 w-40 h-40 bg-gradient-to-br from-gray-300 via-gray-400 to-gray-500 rounded-full opacity-60 blur-xl">
+            <div className="absolute inset-0 bg-gray-300 rounded-full blur-2xl opacity-40 animate-pulse" />
           </div>,
-          // Morning clouds
-          ...Array.from({ length: 6 }).map((_, i) => (
-            <div
-              key={`morning-cloud-${i}`}
-              className="absolute animate-float opacity-50"
-              style={{
-                top: `${10 + Math.random() * 50}%`,
-                left: `${Math.random() * 90}%`,
-                animationDelay: `${i * 1.2}s`,
-                animationDuration: `${10 + Math.random() * 5}s`,
-              }}
-            >
-              <Cloud className="w-20 h-20 text-white" />
-            </div>
-          )),
-          // Morning birds
+          // Heavy rain clouds
           ...Array.from({ length: 8 }).map((_, i) => (
             <div
-              key={`morning-bird-${i}`}
-              className="absolute animate-float opacity-40"
+              key={`morning-rain-cloud-${i}`}
+              className="absolute animate-float opacity-70"
               style={{
-                top: `${20 + Math.random() * 30}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${6 + Math.random() * 3}s`,
+                top: `${10 + Math.random() * 40}%`,
+                left: `${Math.random() * 90}%`,
+                animationDelay: `${i * 1.2}s`,
+                animationDuration: `${8 + Math.random() * 4}s`,
               }}
             >
-              <div className="w-2 h-1 bg-gray-600 rounded-full transform rotate-12" />
-              <div className="w-2 h-1 bg-gray-600 rounded-full transform -rotate-12 ml-1 -mt-1" />
+              <CloudRain className="w-24 h-24 text-gray-300" />
+            </div>
+          )),
+          // Rain drops
+          ...Array.from({ length: 30 }).map((_, i) => (
+            <div
+              key={`morning-rain-${i}`}
+              className="absolute animate-bounce opacity-60"
+              style={{
+                top: `${Math.random() * 80}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 2}s`,
+                animationDuration: `${0.5 + Math.random() * 0.5}s`,
+              }}
+            >
+              <div className="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-blue-400 rounded-full opacity-80" />
+            </div>
+          )),
+          // Puddle reflections
+          ...Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={`morning-puddle-${i}`}
+              className="absolute bottom-0 animate-pulse opacity-30"
+              style={{
+                left: `${Math.random() * 90}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`,
+              }}
+            >
+              <div className="w-16 h-4 bg-gradient-to-r from-transparent via-blue-200 to-transparent rounded-full blur-sm" />
             </div>
           ))
         ]
       },
       afternoon: {
         colors: {
-          primary: 'from-blue-500 via-blue-400 to-cyan-300',
-          secondary: 'from-blue-400/30 via-cyan-300/20 to-blue-200/30',
-          accent: 'from-cyan-300/20 via-blue-200/15 to-white/20'
+          primary: 'from-gray-700 via-gray-600 to-blue-500',
+          secondary: 'from-gray-600/40 via-blue-500/30 to-gray-500/30',
+          accent: 'from-blue-500/25 via-gray-500/20 to-white/15'
         },
         elements: [
-          // Bright afternoon sun
-          <div key="afternoon-sun" className="absolute top-12 right-12 w-44 h-44 bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-400 rounded-full opacity-95">
-            <div className="absolute inset-0 bg-yellow-400 rounded-full blur-2xl opacity-60 animate-pulse" />
-            <div className="absolute inset-3 bg-gradient-to-br from-yellow-300 to-yellow-400 rounded-full" />
-            <div className="absolute inset-6 bg-gradient-to-br from-yellow-200 to-yellow-300 rounded-full animate-pulse" />
-            {/* Intense sun rays */}
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div
-                key={`afternoon-ray-${i}`}
-                className="absolute w-1 h-24 bg-gradient-to-t from-yellow-500 to-transparent opacity-70 animate-pulse"
-                style={{
-                  top: '-48px',
-                  left: '50%',
-                  transformOrigin: 'bottom center',
-                  transform: `translateX(-50%) rotate(${i * 30}deg)`,
-                  animationDelay: `${i * 0.15}s`
-                }}
-              />
-            ))}
+          // Heavy overcast sky
+          <div key="afternoon-overcast" className="absolute top-12 right-12 w-44 h-44 bg-gradient-to-br from-gray-400 via-gray-500 to-gray-600 rounded-full opacity-70 blur-2xl">
+            <div className="absolute inset-0 bg-gray-400 rounded-full blur-3xl opacity-50 animate-pulse" />
           </div>,
-          // Afternoon clouds
-          ...Array.from({ length: 5 }).map((_, i) => (
+          // Storm clouds
+          ...Array.from({ length: 10 }).map((_, i) => (
             <div
-              key={`afternoon-cloud-${i}`}
-              className="absolute animate-float opacity-60"
+              key={`afternoon-storm-cloud-${i}`}
+              className="absolute animate-float opacity-80"
               style={{
-                top: `${15 + Math.random() * 40}%`,
+                top: `${5 + Math.random() * 35}%`,
                 left: `${Math.random() * 85}%`,
                 animationDelay: `${i * 1.5}s`,
-                animationDuration: `${12 + Math.random() * 6}s`,
+                animationDuration: `${10 + Math.random() * 6}s`,
               }}
             >
-              <Cloud className="w-24 h-24 text-white" />
+              <CloudRain className="w-28 h-28 text-gray-400" />
             </div>
           )),
-          // Afternoon light particles
-          ...Array.from({ length: 20 }).map((_, i) => (
+          // Heavy rain
+          ...Array.from({ length: 40 }).map((_, i) => (
             <div
-              key={`afternoon-particle-${i}`}
-              className="absolute animate-float opacity-30"
+              key={`afternoon-heavy-rain-${i}`}
+              className="absolute animate-bounce opacity-70"
               style={{
-                top: `${Math.random() * 100}%`,
+                top: `${Math.random() * 85}%`,
                 left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 4}s`,
-                animationDuration: `${3 + Math.random() * 3}s`,
+                animationDelay: `${Math.random() * 1.5}s`,
+                animationDuration: `${0.3 + Math.random() * 0.4}s`,
               }}
             >
-              <div className="w-1 h-1 bg-yellow-200 rounded-full animate-pulse" />
+              <div className="w-0.5 h-10 bg-gradient-to-b from-blue-300 to-blue-500 rounded-full opacity-90" />
+            </div>
+          )),
+          // Lightning flashes (occasional)
+          ...Array.from({ length: 2 }).map((_, i) => (
+            <div
+              key={`afternoon-lightning-${i}`}
+              className="absolute animate-ping opacity-80"
+              style={{
+                top: `${Math.random() * 50}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 8}s`,
+                animationDuration: `0.2s`,
+              }}
+            >
+              <div className="w-1 h-20 bg-gradient-to-b from-yellow-200 via-white to-blue-200 transform rotate-12 opacity-90" />
             </div>
           ))
         ]
@@ -419,8 +415,7 @@ export const DynamicBackground: React.FC = () => {
         <div className="bg-black/20 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
           <div className="flex items-center space-x-2">
             {timeOfDay.period === 'dawn' && <Sun className="w-4 h-4 text-orange-300" />}
-            {timeOfDay.period === 'morning' && <Sun className="w-4 h-4 text-yellow-300" />}
-            {timeOfDay.period === 'afternoon' && <Sun className="w-4 h-4 text-yellow-400" />}
+            {(timeOfDay.period === 'morning' || timeOfDay.period === 'afternoon') && <CloudRain className="w-4 h-4 text-blue-300" />}
             {timeOfDay.period === 'evening' && <Sun className="w-4 h-4 text-orange-400" />}
             {(timeOfDay.period === 'night' || timeOfDay.period === 'lateNight') && <Moon className="w-4 h-4 text-gray-300" />}
             <span className="text-white/80 text-sm font-medium capitalize">
