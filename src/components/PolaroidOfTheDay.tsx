@@ -3,7 +3,7 @@ import { Camera, Heart, Star, Sparkles, RotateCcw, X } from 'lucide-react';
 
 // Fixed polaroid data - no longer changes daily
 const fixedPolaroid = {
-  url: '/custom-polaroid.png', // Using the custom polaroid image from your public folder
+  url: 'https://i.ibb.co/CKkCJ2x3/IMG-20250705-152656.jpg',
   caption: 'Living my best life with style ✨',
   mood: 'Main Character Energy'
 };
