@@ -14,7 +14,7 @@ import { DynamicBackground } from './components/DynamicBackground';
 import { Calendar, Clock } from 'lucide-react';
 
 function AppContent() {
-  const { theme } = useTheme();
+  const { theme, isTransitioning } = useTheme();
   // Target date: July 12, 2025, 00:00:00 IST
   const targetDate = new Date('2025-07-12T00:00:00+05:30');
   const { days, hours, minutes, seconds, isExpired } = useCountdown(targetDate);
@@ -42,17 +42,64 @@ function AppContent() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      {/* Theme Transition Overlay */}
+      {isTransitioning && (
+        <div className="fixed inset-0 z-50 pointer-events-none">
+          {/* Ripple effect from center */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="theme-transition-ripple" />
+            <div className="theme-transition-ripple" style={{ animationDelay: '0.3s' }} />
+            <div className="theme-transition-ripple" style={{ animationDelay: '0.6s' }} />
+          </div>
+          
+          {/* Particle burst effect */}
+          <div className="absolute inset-0">
+            {Array.from({ length: 30 }).map((_, i) => (
+              <div
+                key={i}
+                className="absolute animate-transition-particle"
+                style={{
+                  top: '50%',
+                  left: '50%',
+                  animationDelay: `${i * 0.05}s`,
+                  '--angle': `${(i * 12)}deg`,
+                  '--distance': `${200 + Math.random() * 300}px`
+                } as React.CSSProperties}
+              >
+                <div className={`w-2 h-2 rounded-full ${
+                  theme === 'coral-reef' 
+                    ? 'bg-gradient-to-r from-cyan-400 to-teal-400' 
+                    : 'bg-gradient-to-r from-purple-400 to-pink-400'
+                }`} />
+              </div>
+            ))}
+          </div>
+          
+          {/* Color wash overlay */}
+          <div className={`absolute inset-0 theme-color-wash ${
+            theme === 'coral-reef' 
+              ? 'bg-gradient-radial from-cyan-500/30 via-teal-400/20 to-transparent' 
+              : 'bg-gradient-radial from-purple-500/30 via-pink-400/20 to-transparent'
+          }`} />
+        </div>
+      )}
       {/* Polaroid of the Day */}
       <PolaroidOfTheDay isVisible={showPolaroid} onClose={handlePolaroidClose} />
 
       {/* Dynamic Time-Based Background */}
-      {theme === 'coral-reef' ? <CoralReefBackground /> : <DynamicBackground />}
+      <div className={`transition-opacity duration-1500 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+        {theme === 'coral-reef' ? <CoralReefBackground /> : <DynamicBackground />}
+      </div>
 
       {/* Floating Elements */}
-      <FloatingElements />
+      <div className={`transition-opacity duration-1000 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+        <FloatingElements />
+      </div>
 
       {/* Main Content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-8">
+      <div className={`relative z-10 min-h-screen flex items-center justify-center px-4 py-8 transition-all duration-1000 ${
+        isTransitioning ? 'opacity-80 scale-95 blur-sm' : 'opacity-100 scale-100 blur-0'
+      }`}>
         {/* Theme Toggle Button */}
         <div className="absolute top-6 right-6 z-20">
           <ThemeToggle />

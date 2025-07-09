@@ -4,6 +4,7 @@ export type Theme = 'default' | 'coral-reef';
 
 interface ThemeContextType {
   theme: Theme;
+  isTransitioning: boolean;
   toggleTheme: () => void;
   setTheme: (theme: Theme) => void;
 }
@@ -20,6 +21,7 @@ export const useTheme = () => {
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>('default');
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('july12th-theme') as Theme;
@@ -29,8 +31,20 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   const setTheme = (newTheme: Theme) => {
+    if (newTheme === theme) return;
+    
+    setIsTransitioning(true);
+    
+    // Add a delay to allow for transition effects
+    setTimeout(() => {
     setThemeState(newTheme);
     localStorage.setItem('july12th-theme', newTheme);
+      
+      // End transition after theme change
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 1500); // Match the transition duration
+    }, 300);
   };
 
   const toggleTheme = () => {
@@ -39,7 +53,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, isTransitioning, toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );
