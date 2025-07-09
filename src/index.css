@@ -607,14 +607,49 @@
 }
 
 /* Theme Transition Animations */
-@keyframes themeTransitionRipple {
+@keyframes themeTransitionRipple1 {
   0% {
     width: 0;
     height: 0;
-    opacity: 0.8;
+    opacity: 0.9;
+  }
+  30% {
+    opacity: 0.7;
+  }
+  70% {
+    opacity: 0.3;
+  }
+  100% {
+    width: 300vmax;
+    height: 300vmax;
+    opacity: 0;
+  }
+}
+
+@keyframes themeTransitionRipple2 {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.7;
+  }
+  40% {
+    opacity: 0.5;
+  }
+  100% {
+    width: 250vmax;
+    height: 250vmax;
+    opacity: 0;
+  }
+}
+
+@keyframes themeTransitionRipple3 {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.5;
   }
   50% {
-    opacity: 0.4;
+    opacity: 0.3;
   }
   100% {
     width: 200vmax;
@@ -628,38 +663,193 @@
     transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(1);
     opacity: 1;
   }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(calc(var(--distance) * 0.6)) scale(1.2);
+  }
   100% {
     transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--distance)) scale(0);
     opacity: 0;
   }
 }
 
-@keyframes colorWash {
+@keyframes spiralParticle {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(calc(var(--spiral-angle) + 360deg)) translateX(var(--spiral-radius)) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes transitionWave {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.6;
+    border-width: 3px;
+  }
+  50% {
+    opacity: 0.4;
+    border-width: 2px;
+  }
+  100% {
+    width: 150vmax;
+    height: 150vmax;
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+@keyframes starburst {
+  0% {
+    transform: rotate(var(--star-angle)) translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--star-angle)) translateX(200px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes colorWash1 {
   0% {
     opacity: 0;
     transform: scale(0.8);
+  }
+  30% {
+    opacity: 0.8;
+    transform: scale(1.1);
   }
   50% {
     opacity: 1;
     transform: scale(1.2);
   }
+  80% {
+    opacity: 0.6;
+    transform: scale(1.4);
+  }
   100% {
     opacity: 0;
-    transform: scale(1.5);
+    transform: scale(1.8);
   }
 }
 
-.theme-transition-ripple {
+@keyframes colorWash2 {
+  0% {
+    opacity: 0;
+    transform: scale(1.2) rotate(0deg);
+  }
+  40% {
+    opacity: 0.6;
+    transform: scale(1.5) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2) rotate(360deg);
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-100vw) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(100vw) skewX(-20deg);
+  }
+}
+
+@keyframes vortexSpin {
+  0% {
+    transform: rotate(0deg) scale(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: rotate(180deg) scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: rotate(360deg) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes completionFlash {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+.theme-transition-ripple-1 {
+  position: absolute;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  animation: themeTransitionRipple1 1.6s ease-out forwards;
+}
+
+.theme-transition-ripple-2 {
   position: absolute;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  animation: themeTransitionRipple 1.5s ease-out forwards;
+  animation: themeTransitionRipple2 1.4s ease-out forwards 0.2s;
+}
+
+.theme-transition-ripple-3 {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: themeTransitionRipple3 1.2s ease-out forwards 0.4s;
 }
 
 .animate-transition-particle {
-  animation: transitionParticle 1.2s ease-out forwards;
+  animation: transitionParticle 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-.theme-color-wash {
-  animation: colorWash 1.5s ease-out forwards;
+.animate-spiral-particle {
+  animation: spiralParticle 1.8s ease-out forwards;
+}
+
+.theme-transition-wave {
+  border: solid var(--wave-color);
+  border-radius: 50%;
+  animation: transitionWave 1.2s ease-out forwards;
+}
+
+.animate-starburst {
+  animation: starburst 1s ease-out forwards;
+}
+
+.theme-color-wash-1 {
+  animation: colorWash1 1.6s ease-out forwards;
+}
+
+.theme-color-wash-2 {
+  animation: colorWash2 1.8s ease-out forwards 0.3s;
+}
+
+.theme-shimmer {
+  animation: shimmerSweep 1.2s ease-out forwards 0.5s;
+}
+
+.theme-vortex {
+  width: 200px;
+  height: 200px;
+  border: 2px solid;
+  border-radius: 50%;
+  animation: vortexSpin 1.5s ease-out forwards;
+}
+
+.theme-completion-flash {
+  animation: completionFlash 0.8s ease-out forwards 1.2s;
 }
