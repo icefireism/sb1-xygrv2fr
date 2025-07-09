@@ -275,3 +275,333 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
 }
+
+/* Enhanced Ocean Theme Animations */
+@keyframes swim-left {
+  0% {
+    transform: translateX(100vw) translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateX(75vw) translateY(-10px) rotate(-2deg);
+  }
+  50% {
+    transform: translateX(50vw) translateY(5px) rotate(1deg);
+  }
+  75% {
+    transform: translateX(25vw) translateY(-5px) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(-20vw) translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes swim-right {
+  0% {
+    transform: translateX(-20vw) translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateX(25vw) translateY(-8px) rotate(2deg);
+  }
+  50% {
+    transform: translateX(50vw) translateY(3px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(75vw) translateY(-3px) rotate(1deg);
+  }
+  100% {
+    transform: translateX(100vw) translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-50vh) scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes bubble-wobble {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+}
+
+@keyframes jellyfish-float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-15px) translateX(5px);
+  }
+  50% {
+    transform: translateY(-25px) translateX(-3px);
+  }
+  75% {
+    transform: translateY(-10px) translateX(-8px);
+  }
+}
+
+@keyframes jellyfish-pulse {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.9);
+  }
+}
+
+@keyframes tentacle-sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes tentacle-wave {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scaleY(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scaleY(1.1);
+  }
+}
+
+@keyframes seaweed-sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes anemone-sway {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(2deg);
+  }
+}
+
+@keyframes ray-shimmer {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes bioluminescence {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes deep-glow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  33% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+  66% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes deep-sleep {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes water-surface {
+  0%, 100% {
+    transform: scaleX(1) scaleY(1);
+  }
+  25% {
+    transform: scaleX(1.02) scaleY(0.98);
+  }
+  75% {
+    transform: scaleX(0.98) scaleY(1.02);
+  }
+}
+
+@keyframes caustic-1 {
+  0%, 100% {
+    transform: translateX(0px) translateY(0px) scale(1);
+  }
+  33% {
+    transform: translateX(10px) translateY(-5px) scale(1.1);
+  }
+  66% {
+    transform: translateX(-8px) translateY(8px) scale(0.9);
+  }
+}
+
+@keyframes caustic-2 {
+  0%, 100% {
+    transform: translateX(0px) translateY(0px) scale(1);
+  }
+  25% {
+    transform: translateX(-12px) translateY(6px) scale(1.05);
+  }
+  75% {
+    transform: translateX(15px) translateY(-10px) scale(0.95);
+  }
+}
+
+@keyframes caustic-3 {
+  0%, 100% {
+    transform: translateX(0px) translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateX(8px) translateY(-12px) scale(1.08);
+  }
+}
+
+@keyframes particle-drift {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-35px) translateX(-5px);
+  }
+  75% {
+    transform: translateY(-50px) translateX(15px);
+  }
+  100% {
+    transform: translateY(-70px) translateX(-10px);
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  75% {
+    transform: rotate(-3deg);
+  }
+}
+
+/* Animation classes */
+.animate-swim-left {
+  animation: swim-left linear infinite;
+}
+
+.animate-swim-right {
+  animation: swim-right linear infinite;
+}
+
+.animate-bubble-rise {
+  animation: bubble-rise linear infinite;
+}
+
+.animate-bubble-wobble {
+  animation: bubble-wobble 2s ease-in-out infinite;
+}
+
+.animate-jellyfish-float {
+  animation: jellyfish-float 6s ease-in-out infinite;
+}
+
+.animate-jellyfish-pulse {
+  animation: jellyfish-pulse 2s ease-in-out infinite;
+}
+
+.animate-tentacle-sway {
+  animation: tentacle-sway 3s ease-in-out infinite;
+}
+
+.animate-tentacle-wave {
+  animation: tentacle-wave 2s ease-in-out infinite;
+}
+
+.animate-seaweed-sway {
+  animation: seaweed-sway 4s ease-in-out infinite;
+}
+
+.animate-anemone-sway {
+  animation: anemone-sway 5s ease-in-out infinite;
+}
+
+.animate-ray-shimmer {
+  animation: ray-shimmer 3s ease-in-out infinite;
+}
+
+.animate-bioluminescence {
+  animation: bioluminescence 4s ease-in-out infinite;
+}
+
+.animate-deep-glow {
+  animation: deep-glow 6s ease-in-out infinite;
+}
+
+.animate-deep-sleep {
+  animation: deep-sleep 8s ease-in-out infinite;
+}
+
+.animate-water-surface {
+  animation: water-surface 8s ease-in-out infinite;
+}
+
+.animate-caustic-1 {
+  animation: caustic-1 12s ease-in-out infinite;
+}
+
+.animate-caustic-2 {
+  animation: caustic-2 15s ease-in-out infinite;
+}
+
+.animate-caustic-3 {
+  animation: caustic-3 18s ease-in-out infinite;
+}
+
+.animate-particle-drift {
+  animation: particle-drift linear infinite;
+}
+
+.animate-sway {
+  animation: sway 4s ease-in-out infinite;
+}
