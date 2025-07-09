@@ -1,4 +1,7 @@
 import React from 'react';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
+import { ThemeToggle } from './components/ThemeToggle';
+import { CoralReefBackground } from './components/CoralReefBackground';
 import { useCountdown } from './hooks/useCountdown';
 import { CountdownCard } from './components/CountdownCard';
 import { FloatingElements } from './components/FloatingElements';
@@ -10,7 +13,8 @@ import { SpotifyPlayer } from './components/SpotifyPlayer';
 import { DynamicBackground } from './components/DynamicBackground';
 import { Calendar, Clock } from 'lucide-react';
 
-function App() {
+function AppContent() {
+  const { theme } = useTheme();
   // Target date: July 12, 2025, 00:00:00 IST
   const targetDate = new Date('2025-07-12T00:00:00+05:30');
   const { days, hours, minutes, seconds, isExpired } = useCountdown(targetDate);
@@ -42,13 +46,18 @@ function App() {
       <PolaroidOfTheDay isVisible={showPolaroid} onClose={handlePolaroidClose} />
 
       {/* Dynamic Time-Based Background */}
-      <DynamicBackground />
+      {theme === 'coral-reef' ? <CoralReefBackground /> : <DynamicBackground />}
 
       {/* Floating Elements */}
       <FloatingElements />
 
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-8">
+        {/* Theme Toggle Button */}
+        <div className="absolute top-6 right-6 z-20">
+          <ThemeToggle />
+        </div>
+        
         <div className="max-w-6xl mx-auto text-center">
           {/* Header */}
           <div className="mb-12 md:mb-16">
@@ -111,6 +120,14 @@ function App() {
         </div>
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 
