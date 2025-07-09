@@ -607,176 +607,543 @@
 }
 
 /* Theme Transition Animations */
-@keyframes themeTransitionRipple1 {
+@keyframes liquidMorph {
   0% {
-    width: 0;
-    height: 0;
-    opacity: 0.9;
-  }
-  30% {
-    opacity: 0.7;
-  }
-  70% {
-    opacity: 0.3;
-  }
-  100% {
-    width: 300vmax;
-    height: 300vmax;
+    clip-path: circle(0% at 50% 50%);
     opacity: 0;
+    transform: scale(0.8) rotate(0deg);
   }
-}
-
-@keyframes themeTransitionRipple2 {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 0.7;
+  20% {
+    opacity: 1;
+    transform: scale(1.1) rotate(45deg);
   }
   40% {
-    opacity: 0.5;
+    clip-path: circle(30% at 50% 50%);
+    transform: scale(1.2) rotate(90deg);
   }
-  100% {
-    width: 250vmax;
-    height: 250vmax;
-    opacity: 0;
-  }
-}
-
-@keyframes themeTransitionRipple3 {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 0.3;
-  }
-  100% {
-    width: 200vmax;
-    height: 200vmax;
-    opacity: 0;
-  }
-}
-
-@keyframes transitionParticle {
-  0% {
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(1);
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(calc(var(--distance) * 0.6)) scale(1.2);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--distance)) scale(0);
-    opacity: 0;
-  }
-}
-
-@keyframes spiralParticle {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg) translateX(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(calc(var(--spiral-angle) + 360deg)) translateX(var(--spiral-radius)) scale(0);
-    opacity: 0;
-  }
-}
-
-@keyframes transitionWave {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 0.6;
-    border-width: 3px;
-  }
-  50% {
-    opacity: 0.4;
-    border-width: 2px;
-  }
-  100% {
-    width: 150vmax;
-    height: 150vmax;
-    opacity: 0;
-    border-width: 1px;
-  }
-}
-
-@keyframes starburst {
-  0% {
-    transform: rotate(var(--star-angle)) translateX(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(var(--star-angle)) translateX(200px) scale(0);
-    opacity: 0;
-  }
-}
-
-@keyframes colorWash1 {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  30% {
-    opacity: 0.8;
-    transform: scale(1.1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
+  60% {
+    clip-path: circle(60% at 50% 50%);
+    transform: scale(1.1) rotate(180deg);
   }
   80% {
-    opacity: 0.6;
-    transform: scale(1.4);
+    clip-path: circle(90% at 50% 50%);
+    transform: scale(1.05) rotate(270deg);
   }
   100% {
-    opacity: 0;
-    transform: scale(1.8);
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
   }
 }
 
-@keyframes colorWash2 {
+@keyframes energyPulse {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+    filter: blur(10px) hue-rotate(0deg);
+  }
+  25% {
+    transform: scale(0.5) rotate(90deg);
+    opacity: 0.8;
+    filter: blur(5px) hue-rotate(90deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+    filter: blur(0px) hue-rotate(180deg);
+  }
+  75% {
+    transform: scale(1.5) rotate(270deg);
+    opacity: 0.6;
+    filter: blur(2px) hue-rotate(270deg);
+  }
+  100% {
+    transform: scale(2) rotate(360deg);
+    opacity: 0;
+    filter: blur(8px) hue-rotate(360deg);
+  }
+}
+
+@keyframes vortexSpiral {
+  0% {
+    transform: scale(0) rotate(0deg) skew(0deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
+  30% {
+    transform: scale(0.8) rotate(180deg) skew(10deg);
+    opacity: 0.9;
+    border-radius: 30%;
+  }
+  60% {
+    transform: scale(1.5) rotate(360deg) skew(20deg);
+    opacity: 0.7;
+    border-radius: 10%;
+  }
+  80% {
+    transform: scale(2.2) rotate(540deg) skew(15deg);
+    opacity: 0.4;
+    border-radius: 5%;
+  }
+  100% {
+    transform: scale(3) rotate(720deg) skew(0deg);
+    opacity: 0;
+    border-radius: 0%;
+  }
+}
+
+@keyframes quantumParticle {
+  0% {
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    opacity: 1;
+    filter: blur(0px) brightness(1);
+  }
+  25% {
+    transform: translate(-50%, -50%) scale(1.5) rotate(90deg);
+    opacity: 0.9;
+    filter: blur(1px) brightness(1.5);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1) rotate(180deg);
+    opacity: 0.7;
+    filter: blur(2px) brightness(2);
+  }
+  75% {
+    transform: translate(-50%, -50%) scale(2) rotate(270deg);
+    opacity: 0.5;
+    filter: blur(3px) brightness(1.5);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0) rotate(360deg);
+    opacity: 0;
+    filter: blur(5px) brightness(1);
+  }
+}
+
+@keyframes dimensionalRift {
+  0% {
+    width: 0;
+    height: 100vh;
+    opacity: 0;
+    transform: scaleX(0) skewY(0deg);
+    filter: blur(10px);
+  }
+  20% {
+    width: 2px;
+    opacity: 0.8;
+    transform: scaleX(1) skewY(5deg);
+    filter: blur(5px);
+  }
+  40% {
+    width: 20px;
+    opacity: 1;
+    transform: scaleX(1.2) skewY(10deg);
+    filter: blur(2px);
+  }
+  60% {
+    width: 100px;
+    opacity: 0.9;
+    transform: scaleX(1.5) skewY(15deg);
+    filter: blur(1px);
+  }
+  80% {
+    width: 50vw;
+    opacity: 0.7;
+    transform: scaleX(2) skewY(10deg);
+    filter: blur(0px);
+  }
+  100% {
+    width: 100vw;
+    opacity: 0;
+    transform: scaleX(3) skewY(0deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes cosmicExplosion {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+    filter: blur(20px) brightness(0.5);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+  20% {
+    transform: scale(0.3) rotate(72deg);
+    opacity: 0.9;
+    filter: blur(10px) brightness(1.5);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+  }
+  40% {
+    transform: scale(0.8) rotate(144deg);
+    opacity: 1;
+    filter: blur(5px) brightness(2);
+    box-shadow: 0 0 100px rgba(255, 255, 255, 0.8);
+  }
+  60% {
+    transform: scale(1.5) rotate(216deg);
+    opacity: 0.8;
+    filter: blur(2px) brightness(1.8);
+    box-shadow: 0 0 150px rgba(255, 255, 255, 0.6);
+  }
+  80% {
+    transform: scale(2.5) rotate(288deg);
+    opacity: 0.4;
+    filter: blur(1px) brightness(1.2);
+    box-shadow: 0 0 200px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    transform: scale(4) rotate(360deg);
+    opacity: 0;
+    filter: blur(0px) brightness(1);
+    box-shadow: 0 0 300px rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes lightningBolt {
+  0% {
+    transform: scaleY(0) scaleX(0) rotate(0deg);
+    opacity: 0;
+    filter: blur(5px);
+  }
+  10% {
+    transform: scaleY(0.2) scaleX(1) rotate(5deg);
+    opacity: 1;
+    filter: blur(2px);
+  }
+  30% {
+    transform: scaleY(1) scaleX(1.2) rotate(-5deg);
+    opacity: 0.9;
+    filter: blur(1px);
+  }
+  50% {
+    transform: scaleY(1.5) scaleX(0.8) rotate(10deg);
+    opacity: 0.7;
+    filter: blur(0px);
+  }
+  70% {
+    transform: scaleY(1.2) scaleX(1.5) rotate(-10deg);
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+  90% {
+    transform: scaleY(0.8) scaleX(2) rotate(5deg);
+    opacity: 0.2;
+    filter: blur(3px);
+  }
+  100% {
+    transform: scaleY(0) scaleX(3) rotate(0deg);
+    opacity: 0;
+    filter: blur(5px);
+  }
+}
+
+@keyframes prismShatter {
+  0% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  25% {
+    clip-path: polygon(0% 0%, 100% 0%, 75% 100%, 25% 100%);
+    transform: rotate(90deg) scale(1.1);
+    opacity: 0.9;
+    filter: blur(1px);
+  }
+  50% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    transform: rotate(180deg) scale(1.2);
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+  75% {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+    transform: rotate(270deg) scale(1.3);
+    opacity: 0.6;
+    filter: blur(3px);
+  }
+  100% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    transform: rotate(360deg) scale(1.5);
+    opacity: 0;
+    filter: blur(5px);
+  }
+}
+
+@keyframes waveCollapse {
+  0% {
+    transform: scaleX(0) scaleY(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  25% {
+    transform: scaleX(0.3) scaleY(1.2);
+    opacity: 0.9;
+    filter: blur(1px);
+  }
+  50% {
+    transform: scaleX(1) scaleY(0.8);
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+  75% {
+    transform: scaleX(1.5) scaleY(1.5);
+    opacity: 0.5;
+    filter: blur(3px);
+  }
+  100% {
+    transform: scaleX(2) scaleY(0);
+    opacity: 0;
+    filter: blur(5px);
+  }
+}
+
+@keyframes hologramFlicker {
   0% {
     opacity: 0;
-    transform: scale(1.2) rotate(0deg);
+    transform: scale(1) skew(0deg, 0deg);
+    filter: blur(0px) hue-rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1.1) skew(2deg, 1deg);
+    filter: blur(1px) hue-rotate(36deg);
+  }
+  20% {
+    opacity: 0.8;
+    transform: scale(0.9) skew(-1deg, 2deg);
+    filter: blur(2px) hue-rotate(72deg);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.2) skew(3deg, -1deg);
+    filter: blur(1px) hue-rotate(108deg);
   }
   40% {
     opacity: 0.6;
-    transform: scale(1.5) rotate(180deg);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(2) rotate(360deg);
-  }
-}
-
-@keyframes shimmerSweep {
-  0% {
-    transform: translateX(-100vw) skewX(-20deg);
-  }
-  100% {
-    transform: translateX(100vw) skewX(-20deg);
-  }
-}
-
-@keyframes vortexSpin {
-  0% {
-    transform: rotate(0deg) scale(0);
-    opacity: 0.8;
+    transform: scale(0.8) skew(-2deg, 3deg);
+    filter: blur(3px) hue-rotate(144deg);
   }
   50% {
-    transform: rotate(180deg) scale(1);
-    opacity: 0.4;
+    opacity: 1;
+    transform: scale(1.3) skew(1deg, -2deg);
+    filter: blur(0px) hue-rotate(180deg);
+  }
+  60% {
+    opacity: 0.9;
+    transform: scale(1.1) skew(-3deg, 1deg);
+    filter: blur(2px) hue-rotate(216deg);
+  }
+  70% {
+    opacity: 0.7;
+    transform: scale(0.9) skew(2deg, -3deg);
+    filter: blur(4px) hue-rotate(252deg);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.4) skew(-1deg, 2deg);
+    filter: blur(1px) hue-rotate(288deg);
+  }
+  90% {
+    opacity: 0.5;
+    transform: scale(0.7) skew(3deg, -1deg);
+    filter: blur(5px) hue-rotate(324deg);
   }
   100% {
-    transform: rotate(360deg) scale(0);
     opacity: 0;
+    transform: scale(1.5) skew(0deg, 0deg);
+    filter: blur(10px) hue-rotate(360deg);
   }
 }
 
-@keyframes completionFlash {
+@keyframes portalOpen {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    transform: rotate(0deg) scale(1);
+    opacity: 0;
+    filter: blur(20px);
+  }
+  20% {
+    clip-path: circle(10% at 50% 50%);
+    transform: rotate(72deg) scale(1.1);
+    opacity: 0.3;
+    filter: blur(15px);
+  }
+  40% {
+    clip-path: circle(25% at 50% 50%);
+    transform: rotate(144deg) scale(1.2);
+    opacity: 0.6;
+    filter: blur(10px);
+  }
+  60% {
+    clip-path: circle(45% at 50% 50%);
+    transform: rotate(216deg) scale(1.3);
+    opacity: 0.8;
+    filter: blur(5px);
+  }
+  80% {
+    clip-path: circle(70% at 50% 50%);
+    transform: rotate(288deg) scale(1.4);
+    opacity: 1;
+    filter: blur(2px);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+    transform: rotate(360deg) scale(1.5);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes finalFlash {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+    filter: brightness(1) blur(10px);
+  }
+  20% {
+    opacity: 0.5;
+    transform: scale(0.8);
+    filter: brightness(2) blur(5px);
+  }
+  40% {
+    opacity: 0.8;
+    transform: scale(1.2);
+    filter: brightness(3) blur(2px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.5);
+    filter: brightness(4) blur(0px);
+  }
+  80% {
+    opacity: 0.8;
+    transform: scale(1.8);
+    filter: brightness(2) blur(1px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+    filter: brightness(1) blur(5px);
+  }
+}
+
+/* New transition classes */
+.liquid-morph {
+  position: absolute;
+  inset: 0;
+  animation: liquidMorph 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.energy-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  margin: -100px 0 0 -100px;
+  border-radius: 50%;
+  animation: energyPulse 1.5s ease-out forwards;
+}
+
+.vortex-spiral {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  margin: -150px 0 0 -150px;
+  animation: vortexSpiral 2s ease-in-out forwards;
+}
+
+.quantum-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: quantumParticle 1.8s ease-out forwards;
+}
+
+.dimensional-rift {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: dimensionalRift 1.5s ease-in-out forwards;
+}
+
+.cosmic-explosion {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  border-radius: 50%;
+  animation: cosmicExplosion 2s ease-out forwards;
+}
+
+.lightning-bolt {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100vh;
+  transform: translateX(-50%);
+  animation: lightningBolt 0.8s ease-in-out forwards;
+}
+
+.prism-shatter {
+  position: absolute;
+  inset: 0;
+  animation: prismShatter 1.8s ease-in-out forwards;
+}
+
+.wave-collapse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  animation: waveCollapse 1.2s ease-out forwards;
+}
+
+.hologram-flicker {
+  position: absolute;
+  inset: 0;
+  animation: hologramFlicker 2.5s ease-in-out forwards;
+}
+
+.portal-open {
+  position: absolute;
+  inset: 0;
+  animation: portalOpen 2.2s ease-out forwards;
+}
+
+.final-flash {
+  position: absolute;
+  inset: 0;
+  animation: finalFlash 1s ease-out forwards 1.8s;
+}
+
+/* Remove old transition classes */
+.theme-transition-ripple-1,
+.theme-transition-ripple-2,
+.theme-transition-ripple-3,
+.animate-transition-particle,
+.animate-spiral-particle,
+.theme-transition-wave,
+.animate-starburst,
+.theme-color-wash-1,
+.theme-color-wash-2,
+.theme-shimmer,
+.theme-vortex,
+.theme-completion-flash {
+  display: none;
+}
   0% {
     opacity: 0;
     transform: scale(0.5);

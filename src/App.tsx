@@ -45,148 +45,128 @@ function AppContent() {
       {/* Theme Transition Overlay */}
       {isTransitioning && (
         <div className="fixed inset-0 z-50 pointer-events-none overflow-hidden">
-          {/* Ripple effect from center */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="theme-transition-ripple-1" />
-            <div className="theme-transition-ripple-2" />
-            <div className="theme-transition-ripple-3" />
-          </div>
-          
-          {/* Enhanced particle burst effect */}
-          <div className="absolute inset-0">
-            {Array.from({ length: 50 }).map((_, i) => (
-              <div
-                key={i}
-                className="absolute animate-transition-particle"
-                style={{
-                  top: '50%',
-                  left: '50%',
-                  animationDelay: `${i * 0.02}s`,
-                  '--angle': `${(i * 12)}deg`,
-                  '--distance': `${150 + Math.random() * 400}px`,
-                  '--size': `${2 + Math.random() * 4}px`
-                } as React.CSSProperties}
-              >
-                <div 
-                  className={`rounded-full transition-all duration-300 ${
-                    theme === 'coral-reef' 
-                      ? 'bg-gradient-to-r from-cyan-400 via-teal-400 to-blue-400 shadow-lg shadow-cyan-400/50' 
-                      : 'bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 shadow-lg shadow-purple-400/50'
-                  }`}
-                  style={{
-                    width: 'var(--size)',
-                    height: 'var(--size)'
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-          
-          {/* Spiral particle effect */}
-          <div className="absolute inset-0">
-            {Array.from({ length: 30 }).map((_, i) => (
-              <div
-                key={`spiral-${i}`}
-                className="absolute animate-spiral-particle"
-                style={{
-                  top: '50%',
-                  left: '50%',
-                  animationDelay: `${i * 0.08}s`,
-                  '--spiral-angle': `${i * 24}deg`,
-                  '--spiral-radius': `${100 + i * 8}px`
-                } as React.CSSProperties}
-              >
-                <div className={`w-3 h-3 rounded-full ${
-                  theme === 'coral-reef' 
-                    ? 'bg-gradient-to-r from-cyan-300 to-teal-300' 
-                    : 'bg-gradient-to-r from-purple-300 to-pink-300'
-                }`} />
-              </div>
-            ))}
-          </div>
-          
-          {/* Wave expansion effect */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div
-                key={`wave-${i}`}
-                className="absolute theme-transition-wave"
-                style={{
-                  animationDelay: `${i * 0.1}s`,
-                  '--wave-color': theme === 'coral-reef' 
-                    ? 'rgba(6, 182, 212, 0.3)' 
-                    : 'rgba(147, 51, 234, 0.3)'
-                } as React.CSSProperties}
-              />
-            ))}
-          </div>
-          
-          {/* Starburst effect */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            {Array.from({ length: 16 }).map((_, i) => (
-              <div
-                key={`star-${i}`}
-                className="absolute animate-starburst"
-                style={{
-                  animationDelay: `${i * 0.05}s`,
-                  '--star-angle': `${i * 22.5}deg`
-                } as React.CSSProperties}
-              >
-                <div className={`w-1 h-20 ${
-                  theme === 'coral-reef' 
-                    ? 'bg-gradient-to-t from-cyan-400 via-teal-300 to-transparent' 
-                    : 'bg-gradient-to-t from-purple-400 via-pink-300 to-transparent'
-                } rounded-full`} />
-              </div>
-            ))}
-          </div>
-          
-          {/* Enhanced color wash overlay with multiple layers */}
-          <div className={`absolute inset-0 theme-color-wash-1 ${
-            theme === 'coral-reef' 
-              ? 'bg-gradient-radial from-cyan-500/40 via-teal-400/25 to-transparent' 
-              : 'bg-gradient-radial from-purple-500/40 via-pink-400/25 to-transparent'
-          }`} />
-          <div className={`absolute inset-0 theme-color-wash-2 ${
-            theme === 'coral-reef' 
-              ? 'bg-gradient-radial from-blue-400/30 via-cyan-300/15 to-transparent' 
-              : 'bg-gradient-radial from-indigo-400/30 via-purple-300/15 to-transparent'
-          }`} />
-          
-          {/* Shimmer overlay */}
-          <div className="absolute inset-0 theme-shimmer">
-            <div className={`absolute inset-0 ${
-              theme === 'coral-reef'
-                ? 'bg-gradient-to-r from-transparent via-cyan-200/20 to-transparent'
-                : 'bg-gradient-to-r from-transparent via-purple-200/20 to-transparent'
-            }`} />
-          </div>
-          
-          {/* Vortex effect */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className={`theme-vortex ${
-              theme === 'coral-reef'
-                ? 'border-cyan-400/40'
-                : 'border-purple-400/40'
-            }`} />
-          </div>
-        </div>
-      )}
-      
-      {/* Enhanced transition blur overlay */}
-      {isTransitioning && (
-        <div className="fixed inset-0 z-40 pointer-events-none">
-          <div className="absolute inset-0 backdrop-blur-sm bg-black/10 transition-all duration-1000" />
-        </div>
-      )}
-      
-      {/* Transition completion flash */}
-      {isTransitioning && (
-        <div className="fixed inset-0 z-45 pointer-events-none">
-          <div className={`absolute inset-0 theme-completion-flash ${
+          {/* Liquid Morph Background */}
+          <div className={`liquid-morph ${
             theme === 'coral-reef'
-              ? 'bg-gradient-radial from-cyan-300/30 to-transparent'
-              : 'bg-gradient-radial from-purple-300/30 to-transparent'
+              ? 'bg-gradient-to-br from-cyan-600 via-teal-500 to-blue-600'
+              : 'bg-gradient-to-br from-purple-600 via-pink-500 to-indigo-600'
+          }`} />
+          
+          {/* Portal Opening Effect */}
+          <div className={`portal-open ${
+            theme === 'coral-reef'
+              ? 'bg-gradient-radial from-cyan-400/80 via-teal-300/60 to-blue-400/40'
+              : 'bg-gradient-radial from-purple-400/80 via-pink-300/60 to-indigo-400/40'
+          }`} />
+          
+          {/* Energy Pulse from Center */}
+          <div className={`energy-pulse ${
+            theme === 'coral-reef'
+              ? 'bg-gradient-radial from-cyan-300 via-teal-400 to-transparent'
+              : 'bg-gradient-radial from-purple-300 via-pink-400 to-transparent'
+          }`} />
+          
+          {/* Vortex Spiral */}
+          <div className={`vortex-spiral ${
+            theme === 'coral-reef'
+              ? 'bg-gradient-conic from-cyan-500 via-teal-400 via-blue-500 to-cyan-500'
+              : 'bg-gradient-conic from-purple-500 via-pink-400 via-indigo-500 to-purple-500'
+          }`} />
+          
+          {/* Quantum Particles */}
+          {Array.from({ length: 40 }).map((_, i) => (
+            <div
+              key={`quantum-${i}`}
+              className={`quantum-particle ${
+                theme === 'coral-reef'
+                  ? 'bg-gradient-to-r from-cyan-300 to-teal-300'
+                  : 'bg-gradient-to-r from-purple-300 to-pink-300'
+              }`}
+              style={{
+                animationDelay: `${i * 0.05}s`,
+                top: `${45 + Math.random() * 10}%`,
+                left: `${45 + Math.random() * 10}%`,
+              }}
+            />
+          ))}
+          
+          {/* Dimensional Rifts */}
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div
+              key={`rift-${i}`}
+              className={`dimensional-rift ${
+                theme === 'coral-reef'
+                  ? 'bg-gradient-to-b from-cyan-400 via-teal-300 to-blue-400'
+                  : 'bg-gradient-to-b from-purple-400 via-pink-300 to-indigo-400'
+              }`}
+              style={{
+                animationDelay: `${i * 0.2}s`,
+                left: `${20 + i * 15}%`,
+                filter: `blur(${i}px)`,
+              }}
+            />
+          ))}
+          
+          {/* Cosmic Explosions */}
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={`explosion-${i}`}
+              className={`cosmic-explosion ${
+                theme === 'coral-reef'
+                  ? 'bg-gradient-radial from-cyan-200 via-teal-300 to-transparent'
+                  : 'bg-gradient-radial from-purple-200 via-pink-300 to-transparent'
+              }`}
+              style={{
+                animationDelay: `${i * 0.15}s`,
+                top: `${30 + Math.random() * 40}%`,
+                left: `${30 + Math.random() * 40}%`,
+              }}
+            />
+          ))}
+          
+          {/* Lightning Bolts */}
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div
+              key={`lightning-${i}`}
+              className={`lightning-bolt ${
+                theme === 'coral-reef'
+                  ? 'bg-gradient-to-b from-cyan-200 via-white to-teal-200'
+                  : 'bg-gradient-to-b from-purple-200 via-white to-pink-200'
+              }`}
+              style={{
+                animationDelay: `${i * 0.3}s`,
+                left: `${40 + i * 10}%`,
+                filter: `blur(${i * 0.5}px)`,
+              }}
+            />
+          ))}
+          
+          {/* Prism Shatter Effect */}
+          <div className={`prism-shatter ${
+            theme === 'coral-reef'
+              ? 'bg-gradient-to-br from-cyan-300/60 via-teal-200/40 to-blue-300/60'
+              : 'bg-gradient-to-br from-purple-300/60 via-pink-200/40 to-indigo-300/60'
+          }`} />
+          
+          {/* Wave Collapse */}
+          <div className={`wave-collapse ${
+            theme === 'coral-reef'
+              ? 'bg-gradient-to-r from-transparent via-cyan-400/80 to-transparent'
+              : 'bg-gradient-to-r from-transparent via-purple-400/80 to-transparent'
+          }`} />
+          
+          {/* Hologram Flicker */}
+          <div className={`hologram-flicker ${
+            theme === 'coral-reef'
+              ? 'bg-gradient-to-br from-cyan-200/30 via-teal-100/20 to-blue-200/30'
+              : 'bg-gradient-to-br from-purple-200/30 via-pink-100/20 to-indigo-200/30'
+          }`} />
+          
+          {/* Final Flash */}
+          <div className={`final-flash ${
+            theme === 'coral-reef'
+              ? 'bg-gradient-radial from-white via-cyan-100 to-transparent'
+              : 'bg-gradient-radial from-white via-purple-100 to-transparent'
           }`} />
         </div>
       )}
