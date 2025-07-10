@@ -744,7 +744,7 @@ export const CoralReefBackground: React.FC = () => {
   if (!timeOfDay) return null;
 
   return (
-    <div className="absolute inset-0 overflow-hidden transition-all duration-[3000ms] ease-in-out">
+    <div className="absolute inset-0 overflow-hidden transition-all duration-[3000ms] ease-in-out z-0">
       {/* Primary Ocean Gradient */}
       <div className={`absolute inset-0 bg-gradient-to-br ${timeOfDay.colors.primary} transition-all duration-[3000ms] ease-in-out`} />
       
